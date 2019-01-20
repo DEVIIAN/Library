@@ -7,20 +7,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Login extends JFrame {
+public class Login extends JFrame {//¼Ì³ĞJava´°¿ÚÀà
     public static String Id;
 //    public static String Pwd;
-    private JLabel lblName=new JLabel("ç”¨æˆ·å");
-    private JLabel lblPwd=new JLabel("å¯†    ç ");
+    private JLabel lblName=new JLabel("ÓÃ»§Ãû");
+    private JLabel lblPwd=new JLabel("ÃÜ    Âë");
     private JTextField txtName=new JTextField(10);
-    private JPasswordField txtPwd=new JPasswordField(10);
-    private JButton btnLogin=new JButton("ç™»é™†");
-    private JButton btnCance =new JButton("å–æ¶ˆ");
-    private JRadioButton RBtnAdmin =new JRadioButton("ç®¡ç†å‘˜");
-    private JRadioButton RBtnReader =new JRadioButton("è¯»  è€…");
+    private JPasswordField txtPwd=new JPasswordField(10);//ÃÜÎÄÎÄ±¾¿ò
+    private JButton btnLogin=new JButton("µÇÂ½");
+    private JButton btnCance =new JButton("È¡Ïû");
+    private JRadioButton RBtnAdmin =new JRadioButton("¹ÜÀíÔ±");
+    private JRadioButton RBtnReader =new JRadioButton("¶Á  Õß");
     private ButtonGroup btnGroup=new ButtonGroup();
     private LoginDao LD=new LoginDao();
     public Login(){
+    	//labelÈ«²¿¾ÓÖĞÏÔÊ¾
         lblName.setHorizontalAlignment(SwingConstants.CENTER);
         lblPwd.setHorizontalAlignment(SwingConstants.CENTER);
         JPanel jp=(JPanel)this.getContentPane();
@@ -33,17 +34,19 @@ public class Login extends JFrame {
         btnGroup.add(RBtnAdmin);btnGroup.add(RBtnReader);
         jp_South.add(RBtnAdmin);jp_South.add(RBtnReader);
         jp.add(jp_Center);jp.add(jp_South,BorderLayout.SOUTH);
-        this.setTitle("ç™»é™†");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(450, 300);
+        this.setTitle("µÇÂ½");			//ÉèÖÃ±êÌâ
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//½çÃæÒ»µ©¹Ø±Õ£¬³ÌĞòÍ£Ö¹
+        this.setSize(450, 300);			//ÉèÖÃµÇÂ¼½çÃæ´óĞ¡
         this.setVisible(true);
-        this.setLocation(500,300);
+        this.setLocation(500,300);		//ÉèÖÃ³öÏÖµÄÎ»ÖÃ
+        //µã»÷µÇÂ¼
         btnLogin.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnLogin_Clicked();
             }
         });
+        //µã»÷ÍË³ö
         btnCance.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -51,38 +54,48 @@ public class Login extends JFrame {
             }
         });
     }
-
+    
+    //Êó±êµã»÷µÇÂ¼°´Å¥ÊÂ¼ş
     public void btnLogin_Clicked(){
         if(RBtnAdmin.isSelected()){
-            String password=LD.SelectPassword(txtName.getText(), "ç®¡ç†å‘˜");
+            String password=LD.SelectPassword(txtName.getText(), "¹ÜÀíÔ±");
             if(txtPwd.getText().equals(password)){
                 MenuAdmin menuAdmin = new MenuAdmin();
-//                this.setVisible(false);
+//                this.setVisible(false);		//´Ë´°¿Ú²»¿ÉÊÓ
+                //Ïú»Ù´Ë´°¿Ú£¬µ«²»Í£Ö¹³ÌĞò
                 dispose();
-                JOptionPane.showMessageDialog( this, "ç™»é™†ç®¡ç†å‘˜æˆåŠŸ");
+                JOptionPane.showMessageDialog( this, "¹ÜÀíÔ±µÇÂ½³É¹¦");
             }
             else{
-                JOptionPane.showMessageDialog( this, "è´¦å·æˆ–å¯†ç é”™è¯¯");
+                JOptionPane.showMessageDialog( this, "ÕËºÅ»òÃÜÂë´íÎó");
                 txtPwd.setText("");
             }
         }
         else if(RBtnReader.isSelected()){
-            String password=LD.SelectPassword(txtName.getText(), "è¯»è€…");
+            String password=LD.SelectPassword(txtName.getText().trim(), "¶ÁÕß");
             if(txtPwd.getText().equals(password)){
                 Id=txtName.getText();
-                MenuReader frm_Reader=new MenuReader(Id);
 //                this.setVisible(false);
                 dispose();
-                Id=txtName.getText();
-                JOptionPane.showMessageDialog( this, "ç™»é™†è¯»è€…æˆåŠŸ");
+                JOptionPane.showMessageDialog( this, "¶ÁÕßµÇÂ½³É¹¦");
+                //¼ì²é¶ÁÕßÓĞÃ»ÓĞÓâÆÚÎ´»¹µÄÊé£¬²¢µ¯³öÏàÓ¦µÄ¶Ô»°¿ò
+                if(LD.SelectNoReturnBooksByReaderID(Id)) {
+                	MenuReader frm_Reader=new MenuReader(Id);
+                	JOptionPane.showMessageDialog( this, "ÓĞÊéÓâÆÚÎ´»¹£¬²»¿É½èÊé");
+                }else {
+                	MenuReader frm_Reader=new MenuReader(Id);
+                	JOptionPane.showMessageDialog( this, "Ã»ÓĞÊéÓâÆÚÎ´»¹£¬¿É½èÊé");
+                }
+                	
+                
             }
             else{
-                JOptionPane.showMessageDialog( this, "è´¦å·æˆ–å¯†ç é”™è¯¯");
+                JOptionPane.showMessageDialog( this, "ÕËºÅ»òÃÜÂë´íÎó");
                 txtPwd.setText("");
             }
         }
         else
-            JOptionPane.showMessageDialog( this, "æœªé€‰æ‹©ç™»é™†ç±»å‹");
+            JOptionPane.showMessageDialog( this, "Î´Ñ¡ÔñµÇÂ½ÀàĞÍ");
     }
 
 

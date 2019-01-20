@@ -13,73 +13,74 @@ import java.util.regex.Pattern;
 public class MenuReader extends JFrame {
 
     /**
-     *  èœå•
+     *  ²Ëµ¥
      */
     private JMenuBar menuBar=new JMenuBar();
-    private JMenu menuInformation=new JMenu("è¯»è€…ä¿¡æ¯");                        //è¯»è€…ä¿¡æ¯
-    private JMenuItem itemLoadBookInformation =new JMenuItem("å€Ÿä¹¦ä¿¡æ¯ç®¡ç†");                //å¯è¿˜ä¹¦
-    private JMenu menuSelectBook=new JMenu("æŸ¥æ‰¾ä¹¦ç±");                         //å¯é€šè¿‡å‡ ç§æ–¹å¼æŸ¥æ‰¾ä¹¦ç±ï¼Œå¹¶é€‰ä¸­ä¹¦å·å€Ÿä¹¦
-    private JMenuItem itemSelectBook =new JMenuItem("æŸ¥æ‰¾ä¹¦ç±");
-    private JMenu menuResetReader=new JMenu("ä¿®æ”¹ä¿¡æ¯");
-    private JMenuItem itemResetReader =new JMenuItem("ä¿®æ”¹è¯»è€…ä¿¡æ¯");
-    private JMenu menuRefresh=new JMenu("åˆ·æ–°");
-    private JMenuItem itemRefresh =new JMenuItem("åˆ·æ–°è¯»è€…ä¿¡æ¯");
+    private JMenu menuInformation=new JMenu("¶ÁÕßĞÅÏ¢");                        //¶ÁÕßĞÅÏ¢
+    private JMenuItem itemLoadBookInformation =new JMenuItem("½èÊéĞÅÏ¢¹ÜÀí");                //¿É»¹Êé
+    private JMenu menuSelectBook=new JMenu("²éÕÒÊé¼®");                         //¿ÉÍ¨¹ı¼¸ÖÖ·½Ê½²éÕÒÊé¼®£¬²¢Ñ¡ÖĞÊéºÅ½èÊé
+    private JMenuItem itemSelectBook =new JMenuItem("²éÕÒÊé¼®");
+    private JMenu menuResetReader=new JMenu("ĞŞ¸ÄĞÅÏ¢");
+    private JMenuItem itemResetReader =new JMenuItem("ĞŞ¸Ä¶ÁÕßĞÅÏ¢");
+    private JMenu menuRefresh=new JMenu("Ë¢ĞÂ");
+    private JMenuItem itemRefresh =new JMenuItem("Ë¢ĞÂ¶ÁÕßĞÅÏ¢");
     /**
-     * å¡ç‰‡å¸ƒå±€
+     * ¿¨Æ¬²¼¾Ö
      */
     private CardLayout card=new CardLayout();
     private JPanel p=new JPanel();
     private JPanel panel=new JPanel(card);
-    private JPanel p_ReaderInformation =null,               //è¯»è€…å€Ÿä¹¦
-            p_ResetReader =null,                         //é‡ç½®å¯†ç 
-            p_Selct = null;                                 //æŸ¥æ‰¾ä¹¦ç±
+    private JPanel p_ReaderInformation =null,               //¶ÁÕß½èÊé
+            p_ResetReader =null,                         //ÖØÖÃÃÜÂë
+            p_Selct = null;                                 //²éÕÒÊé¼®
 
     /**
-     *  è¡¨æ ¼
+     *  ±í¸ñ
      */
-    private JTable tableReaderInformation =null;                        //è¯»è€…ä¿¡æ¯è¡¨
-    private JTable tableReaderLoadBookInformation = null;               //è¯»è€…å€Ÿä¹¦è¡¨
-    private JTable tableBookInformation = null;                         //ä¹¦ç±ä¿¡æ¯è¡¨
-    private JTable tableBookID = null;                                  //ä¹¦å·è¡¨
-    private JTable tableResetReader = null;                             //ä¿®æ”¹è¯»è€…ä¿¡æ¯è¡¨
+    private JTable tableReaderInformation =null;                        //¶ÁÕßĞÅÏ¢±í
+    private JTable tableReaderLoadBookInformation = null;               //¶ÁÕß½èÊé±í
+    private JTable tableBookInformation = null;                         //Êé¼®ĞÅÏ¢±í
+    private JTable tableBookID = null;                                  //ÊéºÅ±í
+    private JTable tableResetReader = null;                             //ĞŞ¸Ä¶ÁÕßĞÅÏ¢±í
 
     /**
-     * è¯»è€…ä¿¡æ¯
+     * ¶ÁÕßĞÅÏ¢
      */
-    private JButton btnReturnBook =new JButton("è¿˜ä¹¦");          //è¿˜ä¹¦
-    private JButton btnExit1 =new JButton("é€€å‡ºç³»ç»Ÿ");
+    private JButton btnReturnBook =new JButton("»¹Êé");          //»¹Êé
+    private JButton btnExit1 =new JButton("ÍË³öÏµÍ³");
 
     /**
-     * æŸ¥ä¹¦ä¿¡æ¯
+     * ²éÊéĞÅÏ¢
      */
     private JComboBox cbSelect = new JComboBox();
     private JTextField txtInformation = new JTextField(50);
-    private JButton btnSelectBook = new JButton("æŸ¥æ‰¾");
-    private JButton btnLoadBook = new JButton("å€Ÿä¹¦");
-    private JButton btnExit2 = new JButton("é€€å‡ºç³»ç»Ÿ");
+    private JButton btnSelectBook = new JButton("²éÕÒ");
+    private JButton btnLoadBook = new JButton("½èÊé");
+    private JButton btnExit2 = new JButton("ÍË³öÏµÍ³");
 
     /**
-     *  ä¿®æ”¹ä¿¡æ¯
+     *  ĞŞ¸ÄĞÅÏ¢
      */
     private JComboBox cbReset = new JComboBox();
-    private JTextField txtResetInformation = new JTextField();                      //å¯¹è¾“å…¥é•¿åº¦æœ‰é™åˆ¶
-    private JButton btnResetInforamtion = new JButton("ä¿®æ”¹");
-    private JButton btnExit3 = new JButton("é€€å‡ºç³»ç»Ÿ");
+    private JTextField txtResetInformation = new JTextField();                      //¶ÔÊäÈë³¤¶ÈÓĞÏŞÖÆ
+    private JButton btnResetInforamtion = new JButton("ĞŞ¸Ä");
+    private JButton btnExit3 = new JButton("ÍË³öÏµÍ³");
 
     /**
-     *  è¿æ¥æ•°æ®åº“æ“ä½œ
+     *  Á¬½ÓÊı¾İ¿â²Ù×÷
      */
     private ReaderDao Dao= new ReaderDao();
+    //¹¹Ôìº¯Êı£¬ÊäÈë²ÎÊıÎª¶ÁÕßÖ¤ºÅ
     public MenuReader(String id){
 
 
         /**
-         * è¡¨æ ¼
+         * ±í¸ñ
          */
         initTableReaderInformation(id);initTableReaderLoadBookInformation(id);
         initTableBookISBNInformation();initTableBookInformation();
         /**
-         *  labelå±…ä¸­
+         *  label¾ÓÖĞ
          */
 
         menuInformation.add(itemLoadBookInformation);menuInformation.addSeparator();
@@ -87,19 +88,22 @@ public class MenuReader extends JFrame {
         menuResetReader.add(itemResetReader);menuResetReader.addSeparator();
         menuRefresh.add(itemRefresh);
         menuBar.add(menuInformation);menuBar.add(menuSelectBook);menuBar.add(menuResetReader);menuBar.add(menuRefresh);
-        this.validate();
+        this.validate();	//È·±£×é¼ş¾ßÓĞÓĞĞ§µÄ²¼¾Ö¡£
         p_ReaderInformation =new JPanel();
         p_ResetReader =new JPanel();
         p_Selct = new JPanel();
         /**
-         *  è¯»è€…ä¿¡æ¯ç•Œé¢
+         *  ¶ÁÕßĞÅÏ¢½çÃæ
          */
+        //ÉèÖÃ²¼¾ÖÎª±ß½ç²¼¾Ö£¬¶«Î÷ÄÏ±±ÖĞ
         p_ReaderInformation.setLayout(new BorderLayout());
+        //ÉèÖÃ²¼¾ÖÎªÍø¸ñ²¼¾Ö
         JPanel jp_TableReader = new JPanel(new GridLayout(2,1));
         JPanel jp_ReaderSouth=new JPanel(new GridLayout(1,2));
+        //ÓĞ¹ö¶¯ÌõµÄ¹ö¶¯Ãæ°å
         JScrollPane jspReaderInformation=new JScrollPane(tableReaderInformation);
         JScrollPane jspLoadBookInformation = new JScrollPane(tableReaderLoadBookInformation);
-
+        
         jp_TableReader.add(jspReaderInformation);jp_TableReader.add(jspLoadBookInformation);
         jp_ReaderSouth.add(btnReturnBook);jp_ReaderSouth.add(btnExit1);
         p_ReaderInformation.add(jp_TableReader, BorderLayout.NORTH);
@@ -131,10 +135,11 @@ public class MenuReader extends JFrame {
         });
 
         /**
-         * æŸ¥æ‰¾ä¹¦ç±ç•Œé¢
+         * ²éÕÒÊé¼®½çÃæ
          */
-        cbSelect.addItem("ä¹¦å");cbSelect.addItem("ISBNä¹¦å·");cbSelect.addItem("ä½œè€…");cbSelect.addItem("å‡ºç‰ˆç¤¾");
-
+        //
+        cbSelect.addItem("ÊéÃû");cbSelect.addItem("ISBNÊéºÅ");cbSelect.addItem("×÷Õß");cbSelect.addItem("³ö°æÉç");
+        //ÉèÖÃ²¼¾ÖÎª±ß½ç²¼¾Ö£¬¶«Î÷ÄÏ±±ÖĞ
         p_Selct.setLayout(new BorderLayout());
         JPanel jp_SelectNorth = new JPanel(new GridLayout(1,2));
         JPanel jp_tableBook = new JPanel(new GridLayout(2,1));
@@ -177,9 +182,9 @@ public class MenuReader extends JFrame {
             }
         });
         /**
-         *  ä¿®æ”¹ä¿¡æ¯
+         *  ĞŞ¸ÄĞÅÏ¢
          */
-        cbReset.addItem("å¯†ç ");cbReset.addItem("å®¶åº­ä½å€");cbReset.addItem("ç”µè¯");
+        cbReset.addItem("ÃÜÂë");cbReset.addItem("¼ÒÍ¥×¡Ö·");cbReset.addItem("µç»°");
 
         p_ResetReader.setLayout(new BorderLayout());
         JPanel jp_ResetNorth = new JPanel(new GridLayout(1,2));
@@ -202,7 +207,7 @@ public class MenuReader extends JFrame {
             }
         });
 
-
+        //ÖØÖÃĞÅÏ¢
         btnResetInforamtion.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -222,259 +227,295 @@ public class MenuReader extends JFrame {
         this.getContentPane().add(p, BorderLayout.SOUTH);
         this.setVisible(true);
 //        this.setSize(1200, 1000);
-        double width = Toolkit.getDefaultToolkit().getScreenSize().width; //å¾—åˆ°å½“å‰å±å¹•åˆ†è¾¨ç‡çš„é«˜
-        double height = Toolkit.getDefaultToolkit().getScreenSize().height;//å¾—åˆ°å½“å‰å±å¹•åˆ†è¾¨ç‡çš„å®½
-        this.setSize((int)width,(int)height);
-        this.setTitle("è¯»è€…");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        double width = Toolkit.getDefaultToolkit().getScreenSize().width; //µÃµ½µ±Ç°ÆÁÄ»·Ö±æÂÊµÄ¸ß
+        double height = Toolkit.getDefaultToolkit().getScreenSize().height;//µÃµ½µ±Ç°ÆÁÄ»·Ö±æÂÊµÄ¿í
+        this.setSize((int)width,(int)height);	//È«ÆÁÄ»µÄ·Ö±æÂÊÏÔÊ¾´°¿Ú
+        this.setTitle("¶ÁÕß");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//¹Ø±Õ´Ë´°¿ÚÔò³ÌĞòÍ£Ö¹
     }
-
+    //²Ëµ¥Ë¢ĞÂ²Ù×÷
     private void itemRefresh_Clicked(String id) {
         String SelectItem = String.valueOf(cbSelect.getSelectedItem());
         String Inforamtion = txtInformation.getText().trim();
         updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
-        if (SelectItem.equals("ä¹¦å")){
-            updateBookISBNInformation(Inforamtion , 0);updateBookInformation(Inforamtion , 0);
-        }
-        else if (SelectItem.equals("ISBNä¹¦å·")){
-            updateBookISBNInformation(Inforamtion , 1);updateBookInformation(Inforamtion , 1);
-        }
-        else if(SelectItem.equals("ä½œè€…")){
-            updateBookISBNInformation(Inforamtion , 2);updateBookInformation(Inforamtion , 2);
-        }
-        else if (SelectItem.equals("å‡ºç‰ˆç¤¾")){
-            updateBookISBNInformation(Inforamtion , 3);updateBookInformation(Inforamtion , 3);
+        if(!Inforamtion.equals("")) {
+        	if (SelectItem.equals("ÊéÃû")){
+                updateBookISBNInformation(Inforamtion , 0);updateBookInformation(Inforamtion , 0);
+            }
+            else if (SelectItem.equals("ISBNÊéºÅ")){
+                updateBookISBNInformation(Inforamtion , 1);updateBookInformation(Inforamtion , 1);
+            }
+            else if(SelectItem.equals("×÷Õß")){
+                updateBookISBNInformation(Inforamtion , 2);updateBookInformation(Inforamtion , 2);
+            }
+            else if (SelectItem.equals("³ö°æÉç")){
+                updateBookISBNInformation(Inforamtion , 3);updateBookInformation(Inforamtion , 3);
+            }
+        }else {
+        	updateBookISBNInformation2();
+        	updateBookInformation2();
         }
     }
 
 
     /**
-     *
+     *	»¹ÊéÊÂ¼ş
      * @param id
      */
     private void btnReturnBook_Clicked(String id) {
         int rowIndex= tableReaderLoadBookInformation.getSelectedRow();
         if(rowIndex>-1){
-            int r=JOptionPane.showConfirmDialog(this, "æ˜¯å¦è¿˜ä¹¦", "è¿˜ä¹¦",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
+            int r=JOptionPane.showConfirmDialog(this, "ÊÇ·ñ»¹Êé", "»¹Êé",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
             if(r==JOptionPane.OK_OPTION){
                 String BookID= tableReaderLoadBookInformation.getValueAt(rowIndex, 1).toString().trim();
                 if(Dao.ReturnBook(id, BookID)>0){
-                    JOptionPane.showMessageDialog(this, "è¿˜ä¹¦æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "»¹Êé³É¹¦");
                     updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
                     UpdateSelectBook();
                 }else{
-                    JOptionPane.showMessageDialog(this, "è¿˜ä¹¦å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "»¹ÊéÊ§°Ü");
                     updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
                     UpdateSelectBook();
                 }
             }
-        }
+        }else
+        	JOptionPane.showMessageDialog(this, "Î´Ñ¡ÖĞ");
     }
-
+    //¸üĞÂ²éÑ¯µ½µÄĞÅÏ¢
     private void UpdateSelectBook(){
-        String SelectItem = String.valueOf(cbSelect.getSelectedItem());
+        String SelectItem = String.valueOf(cbSelect.getSelectedItem()).trim();
         String Information = txtInformation.getText().trim();
-        if (!SelectItem.equals("")){
-            if (SelectItem.equals("ä¹¦å")){
+        if (!Information.equals("")){
+            if (SelectItem.equals("ÊéÃû")){
                 updateBookISBNInformation(Information, 0);
                 updateBookInformation(Information, 0);
             }
-            else if (SelectItem.equals("ISBNä¹¦å·")){
+            else if (SelectItem.equals("ISBNÊéºÅ")){
                 updateBookISBNInformation(Information , 1);
                 updateBookInformation(Information , 1);
             }
-            else if(SelectItem.equals("ä½œè€…")) {
+            else if(SelectItem.equals("×÷Õß")) {
                 updateBookISBNInformation(Information, 2);
                 updateBookInformation(Information, 2);
             }
-            else if (SelectItem.equals("å‡ºç‰ˆç¤¾")) {
+            else if (SelectItem.equals("³ö°æÉç")) {
                 updateBookISBNInformation(Information, 3);
                 updateBookInformation(Information, 3);
             }
         }
-        else
-            JOptionPane.showMessageDialog(this,"æŸ¥è¯¢æ¡ä»¶ä¸èƒ½ä¸ºç©º");
+        else {
+        	updateBookISBNInformation2();
+        	updateBookInformation2();
+        }
     }
-
+    //²éÑ¯Êé¼®ĞÅÏ¢
     private void btnSelectBook_Clicked() {
         String SelectItem = String.valueOf(cbSelect.getSelectedItem());
         String Information = txtInformation.getText().trim();
-        if (SelectItem.equals(""))
-            JOptionPane.showMessageDialog(this,"æŸ¥è¯¢æ¡ä»¶ä¸èƒ½ä¸ºç©º");
+        if (Information.equals(""))
+            JOptionPane.showMessageDialog(this,"²éÑ¯Ìõ¼ş²»ÄÜÎª¿Õ");
         else{
-            if (SelectItem.equals("ä¹¦å")){
+            if (SelectItem.equals("ÊéÃû")){
                 if(Dao.SelectBook(Information, 0)>0){
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "²éÕÒ³É¹¦");
                     updateBookISBNInformation(Information , 0);updateBookInformation(Information , 0);
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "²éÕÒÊ§°Ü");
             }
-            else if (SelectItem.equals("ISBNä¹¦å·")){
+            else if (SelectItem.equals("ISBNÊéºÅ")){
                 if(Dao.SelectBook(Information, 1)>0){
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "²éÕÒ³É¹¦");
                     updateBookISBNInformation(Information , 1);updateBookInformation(Information , 1);
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "²éÕÒÊ§°Ü");
             }
-            else if(SelectItem.equals("ä½œè€…")){
+            else if(SelectItem.equals("×÷Õß")){
                 if(Dao.SelectBook(Information, 2)>0){
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "²éÕÒ³É¹¦");
                     updateBookISBNInformation(Information , 2);updateBookInformation(Information , 2);
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "²éÕÒÊ§°Ü");
             }
-            else if (SelectItem.equals("å‡ºç‰ˆç¤¾")){
+            else if (SelectItem.equals("³ö°æÉç")){
                 if(Dao.SelectBook(Information, 3)>0){
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "²éÕÒ³É¹¦");
                     updateBookISBNInformation(Information , 3);updateBookInformation(Information, 3);
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "æŸ¥æ‰¾å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "²éÕÒÊ§°Ü");
             }
         }
 
 
     }
-
+    //½èÊé
     private void btnLoadtBook_Clicked(String id) {
         String SelectItem = String.valueOf(cbSelect.getSelectedItem());
         int rowIndex= tableBookID.getSelectedRow();
         String Information = txtInformation.getText().trim();
         if(rowIndex>-1){
-            int r=JOptionPane.showConfirmDialog(this, "æ˜¯å¦å€Ÿä¹¦", "å€Ÿä¹¦",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
+            int r=JOptionPane.showConfirmDialog(this, "ÊÇ·ñ½èÊé", "½èÊé",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
             if(r==JOptionPane.OK_OPTION){
                 String BookID= tableBookID.getValueAt(rowIndex, 1).toString().trim();
-                if(Dao.LoadBook(id, BookID)>0){
-                    JOptionPane.showMessageDialog(this, "å€Ÿä¹¦æˆåŠŸ");
-                    updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
-
-                    if (!SelectItem.equals("")){
-                        if (SelectItem.equals("ä¹¦å")){
-                            updateBookISBNInformation(Information, 0);
-                            updateBookInformation(Information, 0);
-                        }
-                        else if (SelectItem.equals("ISBNä¹¦å·")){
-                            updateBookISBNInformation(Information , 1);
-                            updateBookInformation(Information , 1);
-                        }
-                        else if(SelectItem.equals("ä½œè€…")) {
-                            updateBookISBNInformation(Information, 2);
-                            updateBookInformation(Information, 2);
-                        }
-                        else if (SelectItem.equals("å‡ºç‰ˆç¤¾")) {
-                            updateBookISBNInformation(Information, 3);
-                            updateBookInformation(Information, 3);
-                        }
-                    }
-                    else
-                        JOptionPane.showMessageDialog(this,"æŸ¥è¯¢æ¡ä»¶ä¸èƒ½ä¸ºç©º");
-                }else{
-                    JOptionPane.showMessageDialog(this, "å€Ÿä¹¦å¤±è´¥");
-                    updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
+                if(Dao.SelectNoReturnBooksByReaderID(id)) {
+                	JOptionPane.showMessageDialog( this, "ÓĞÊéÓâÆÚÎ´»¹£¬²»¿É½èÊé");
                 }
+                else {
+                	if(Dao.LoadBook(id, BookID)>0){
+                        JOptionPane.showMessageDialog(this, "½èÊé³É¹¦");
+                        updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
+
+                        if (!Information.equals("")){
+                            if (SelectItem.equals("ÊéÃû")){
+                                updateBookISBNInformation(Information, 0);
+                                updateBookInformation(Information, 0);
+                            }
+                            else if (SelectItem.equals("ISBNÊéºÅ")){
+                                updateBookISBNInformation(Information , 1);
+                                updateBookInformation(Information , 1);
+                            }
+                            else if(SelectItem.equals("×÷Õß")) {
+                                updateBookISBNInformation(Information, 2);
+                                updateBookInformation(Information, 2);
+                            }
+                            else if (SelectItem.equals("³ö°æÉç")) {
+                                updateBookISBNInformation(Information, 3);
+                                updateBookInformation(Information, 3);
+                            }
+                        }
+                        else {
+                        	updateBookISBNInformation2();
+                        	updateBookInformation2();
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(this, "½èÊéÊ§°Ü");
+                        updateTableReaderInformation(id);updateReaderLoadBookInformation(id);
+                    }
+                }
+                
             }
-        }
+        }else
+        	JOptionPane.showMessageDialog(this, "Î´Ñ¡ÖĞ");
     }
 
-
+    //ÖØÖÃĞÅÏ¢
     private void btnResetInforamtion_Clicked(String id) {
         String SelectItem = String.valueOf(cbReset.getSelectedItem());
         String Information = txtResetInformation.getText().trim();
         if (Information.equals(""))
-            JOptionPane.showMessageDialog(this, "æ›´æ”¹ä¿¡æ¯ä¸å¯ä¸ºç©º");
+            JOptionPane.showMessageDialog(this, "¸ü¸ÄĞÅÏ¢²»¿ÉÎª¿Õ");
         else{
-            if (SelectItem.equals("å¯†ç ")){
+            if (SelectItem.equals("ÃÜÂë")){
                 if (Information.length() <= 18){
                     if(Dao.ResetInformation(Information, id,  0)>0){
-                        JOptionPane.showMessageDialog(this, "ä¿®æ”¹æˆåŠŸ");
+                        JOptionPane.showMessageDialog(this, "ĞŞ¸Ä³É¹¦");
                         updateTableReaderInformation(id);
+                        txtResetInformation.setText("");
                     }
                     else
-                        JOptionPane.showMessageDialog(this, "ä¿®æ”¹å¤±è´¥");
+                        JOptionPane.showMessageDialog(this, "ĞŞ¸ÄÊ§°Ü");
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "å¯†ç ä½æ•°ä¸èƒ½å¤šäº18ä½");
+                    JOptionPane.showMessageDialog(this, "ÃÜÂëÎ»Êı²»ÄÜ¶àÓÚ18Î»");
             }
-            else if (SelectItem.equals("å®¶åº­ä½å€")){
+            else if (SelectItem.equals("¼ÒÍ¥×¡Ö·")){
                 if(Dao.ResetInformation(Information, id,  1)>0){
-                    JOptionPane.showMessageDialog(this, "ä¿®æ”¹æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "ĞŞ¸Ä³É¹¦");
                     updateTableReaderInformation(id);
+                    txtResetInformation.setText("");
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "ä¿®æ”¹å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "ĞŞ¸ÄÊ§°Ü");
             }
-            else if (SelectItem.equals("ç”µè¯")){
+            else if (SelectItem.equals("µç»°")){
 
                 if (Information.length() == 11 && isNumericInt(Information)){
                     if(Dao.ResetInformation(Information, id, 2)>0){
-                        JOptionPane.showMessageDialog(this, "ä¿®æ”¹æˆåŠŸ");
+                        JOptionPane.showMessageDialog(this, "ĞŞ¸Ä³É¹¦");
                         updateTableReaderInformation(id);
+                        txtResetInformation.setText("");
                     }
                     else
-                        JOptionPane.showMessageDialog(this, "ä¿®æ”¹å¤±è´¥");
+                        JOptionPane.showMessageDialog(this, "ĞŞ¸ÄÊ§°Ü");
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "ç”µè¯å·ç å¿…é¡»ä¸º11ä½æ­£æ•´æ•°");
+                    JOptionPane.showMessageDialog(this, "µç»°ºÅÂë±ØĞëÎª11Î»ÕıÕûÊı");
 
             }
         }
 
     }
 
-
+    //³õÊ¼»¯ĞÅÏ¢
     private void initTableReaderInformation(String id){
-        String[] cols={"è¯»è€…è¯å·","å¯†ç ","å§“å","æ€§åˆ«","å‡ºç”Ÿæ—¥æœŸ","èº«ä»½è¯å·","è¯»ä¹¦ç­‰çº§","å¯å€Ÿä¹¦æ•°é‡","å·²å€Ÿä¹¦æ•°é‡","å·¥ä½œéƒ¨é—¨","å®¶åº­ä½å€","è”ç³»æ–¹å¼"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÃÜÂë","ĞÕÃû","ĞÔ±ğ","³öÉúÈÕÆÚ","Éí·İÖ¤ºÅ","¶ÁÊéµÈ¼¶","¿É½èÊéÊıÁ¿","ÒÑ½èÊéÊıÁ¿","¹¤×÷²¿ÃÅ","¼ÒÍ¥×¡Ö·","ÁªÏµ·½Ê½"};
         String[][] rows=Dao.queryReader(id);
         tableReaderInformation=new JTable(rows,cols);
         tableResetReader = new JTable(rows, cols);
     }
+    //³õÊ¼»¯ĞÅÏ¢
     private void initTableReaderLoadBookInformation(String id){
-        String[] cols={"è¯»è€…è¯å·","ä¹¦å·","å€Ÿä¹¦æ—¶é—´","åº”è¿˜ä¹¦æ—¶é—´","æ˜¯å¦è¿˜ä¹¦"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÊéºÅ","½èÊéÊ±¼ä","Ó¦»¹ÊéÊ±¼ä","ÊÇ·ñ»¹Êé","·£½ğ"};
         String[][] rows=Dao.queryLoadBook(id);
         tableReaderLoadBookInformation = new JTable(rows,cols);
     }
+    //³õÊ¼»¯ĞÅÏ¢
     private void initTableBookISBNInformation(){
-        String[] cols={"ISBNå·","ä¹¦å","ä¹¦ç±ç±»åˆ«","ä½œè€…","å‡ºç‰ˆç¤¾","å¯å€Ÿä¹¦æ•°é‡","ä¹¦ç±ä»‹ç»"};
+        String[] cols={"ISBNºÅ","ÊéÃû","Êé¼®Àà±ğ","×÷Õß","³ö°æÉç","¿É½èÊéÊıÁ¿","Êé¼®½éÉÜ"};
         String[][] rows=Dao.queryISBNBook();
         tableBookInformation=new JTable(rows,cols);
     }
+    //³õÊ¼»¯ĞÅÏ¢
     private void initTableBookInformation(){
-        String[] cols={"ISBNå·","ä¹¦å·","æ˜¯å¦å¯å€Ÿ"};
+        String[] cols={"ISBNºÅ","ÊéºÅ","ÊÇ·ñ¿É½è"};
         String[][] rows=Dao.queryBook();
         tableBookID = new JTable(rows, cols);
     }
-
+    //¸üĞÂĞÅÏ¢
     private void updateReaderLoadBookInformation(String id) {
-        String[] cols={"è¯»è€…è¯å·","ä¹¦å·","å€Ÿä¹¦æ—¶é—´","åº”è¿˜ä¹¦æ—¶é—´","æ˜¯å¦è¿˜ä¹¦"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÊéºÅ","½èÊéÊ±¼ä","Ó¦»¹ÊéÊ±¼ä","ÊÇ·ñ»¹Êé","·£½ğ"};
         String[][] rows=Dao.queryLoadBook(id);
         tableReaderLoadBookInformation.setModel(new DefaultTableModel(rows, cols));
     }
-
+    //¸üĞÂĞÅÏ¢
     private void updateTableReaderInformation(String id) {
-        String[] cols={"è¯»è€…è¯å·","å¯†ç ","å§“å","æ€§åˆ«","å‡ºç”Ÿæ—¥æœŸ","èº«ä»½è¯å·","è¯»ä¹¦ç­‰çº§","å¯å€Ÿä¹¦æ•°é‡","å·²å€Ÿä¹¦æ•°é‡","å·¥ä½œéƒ¨é—¨","å®¶åº­ä½å€","è”ç³»æ–¹å¼"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÃÜÂë","ĞÕÃû","ĞÔ±ğ","³öÉúÈÕÆÚ","Éí·İÖ¤ºÅ","¶ÁÊéµÈ¼¶","¿É½èÊéÊıÁ¿","ÒÑ½èÊéÊıÁ¿","¹¤×÷²¿ÃÅ","¼ÒÍ¥×¡Ö·","ÁªÏµ·½Ê½"};
         String[][] rows=Dao.queryReader(id);
         tableReaderInformation.setModel(new DefaultTableModel(rows, cols));
         tableResetReader.setModel(new DefaultTableModel(rows, cols));
     }
 
 
-
+    //¸üĞÂĞÅÏ¢
     private void updateBookISBNInformation(String SelectItem, int n) {
-        String[] cols={"ISBNå·","ä¹¦å","ä¹¦ç±ç±»åˆ«","ä½œè€…","å‡ºç‰ˆç¤¾","å¯å€Ÿä¹¦æ•°é‡","ä¹¦ç±ä»‹ç»"};
+        String[] cols={"ISBNºÅ","ÊéÃû","Êé¼®Àà±ğ","×÷Õß","³ö°æÉç","¿É½èÊéÊıÁ¿","Êé¼®½éÉÜ"};
         String[][] rows=Dao.SelectISBNBooks(SelectItem, n);
         tableBookInformation.setModel(new DefaultTableModel(rows,cols));
 
     }
+    //¸üĞÂĞÅÏ¢
+    private void updateBookISBNInformation2() {
+        String[] cols={"ISBNºÅ","ÊéÃû","Êé¼®Àà±ğ","×÷Õß","³ö°æÉç","¿É½èÊéÊıÁ¿","Êé¼®½éÉÜ"};
+        String[][] rows=Dao.queryISBNBook();
+        tableBookInformation.setModel(new DefaultTableModel(rows,cols));
 
+    }
+    //¸üĞÂĞÅÏ¢
     private void updateBookInformation(String selectItem, int n) {
-        String[] cols={"ISBNå·","ä¹¦å·","æ˜¯å¦å¯å€Ÿ"};
+        String[] cols={"ISBNºÅ","ÊéºÅ","ÊÇ·ñ¿É½è"};
         String[][] rows=Dao.SelectBooksID(selectItem, n);
         tableBookID.setModel(new DefaultTableModel(rows, cols));
     }
-
+    //¸üĞÂĞÅÏ¢
+    private void updateBookInformation2() {
+        String[] cols={"ISBNºÅ","ÊéºÅ","ÊÇ·ñ¿É½è"};
+        String[][] rows=Dao.queryBook();
+        tableBookID.setModel(new DefaultTableModel(rows, cols));
+    }
+    //ÓÃÕıÔò±í´ïÊ½ÑéÖ¤
     private boolean isNumericInt(String str){
         Pattern pattern = Pattern.compile("^[0-9]*[1-9][0-9]*$");
         Matcher isNum = pattern.matcher(str);

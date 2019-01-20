@@ -1,71 +1,74 @@
 package Dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class SQLHelper {
-    static String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    static String
-            url="jdbc:sqlserver://127.0.0.1:1433;databaseName=Library",
-            user="sa",pwd="L741025";
-    private static Connection conn=null;
-    static{
-        try{
-            Class.forName(driver);
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
-    /*ÊâßË°åcuideËØ≠Âè•*/
-    public static int executeUpdate(String sql){
-        int r=0;
-        try{
-            conn=DriverManager.getConnection(url,user,pwd);
-            Statement cmd=conn.createStatement();
-            r=cmd.executeUpdate(sql);
-            conn.close();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return r;
-    }
-    /*ÊâßË°åÊü•ÊâæËØ≠Âè•ÔºåËøîÂõûÂîØ‰∏ÄÂÄº*/
-    public static Object executeSingleQuery(String singleSQL){
-        Object r=null;
-        ResultSet rs=null;
-        try{
-            conn=DriverManager.getConnection(url,user,pwd);
-            Statement cmd=conn.createStatement();
-            rs=cmd.executeQuery(singleSQL);
-            if(rs.next()){
-                r=rs.getObject(1);
-            }
-            conn.close();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return r;
-    }
-    /*ÊâßË°åselectËØ≠Âè•*/
-    public static ResultSet executeQuery(String sql){
-        ResultSet rs=null;
-        try{
-            conn=DriverManager.getConnection(url,user,pwd);
-            Statement cmd=conn.createStatement();
-            rs=cmd.executeQuery(sql);
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return rs;
-    }
+	    static String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	    static String
+	            url="jdbc:sqlserver://127.0.0.1:1433;databaseName=Library",
+	            user="sa",pwd="huanhuan20162151";
+	    private static Connection conn=null;
+	    static{
+	        try{
+	            Class.forName(driver);
+	        }catch(Exception ex){
+	            ex.printStackTrace();
+	        }
+	    }
+	    /*÷¥––cuide”Ôæ‰*/
+	    public static int executeUpdate(String sql){
+	        int r=0;
+	        try{
+	            conn=DriverManager.getConnection(url,user,pwd);
+	            Statement cmd=conn.createStatement();
+	            r=cmd.executeUpdate(sql);
+	            conn.close();
+	        }catch(Exception ex){
+	            ex.printStackTrace();
+	        }
+	        return r;
+	    }
+	    /*÷¥––≤È’“”Ôæ‰£¨∑µªÿŒ®“ª÷µ*/
+	    public static Object executeSingleQuery(String singleSQL){
+	        Object r=null;
+	        ResultSet rs=null;
+	        try{
+	            conn=DriverManager.getConnection(url,user,pwd);
+	            Statement cmd=conn.createStatement();
+	            rs=cmd.executeQuery(singleSQL);
+	            if(rs.next()){
+	                r=rs.getObject(1);
+	            }
+	            conn.close();
+	        }catch(Exception ex){
+	            ex.printStackTrace();
+	        }
+	        return r;
+	    }
+	    /*÷¥––select”Ôæ‰*/
+	    public static ResultSet executeQuery(String sql){
+	        ResultSet rs=null;
+	        try{
+	            conn=DriverManager.getConnection(url,user,pwd);
+	            Statement cmd=conn.createStatement();
+	            rs=cmd.executeQuery(sql);
+	        }catch(Exception ex){
+	            ex.printStackTrace();
+	        }
+	        return rs;
+	    }
 
-    /*ÂÖ≥Èó≠Êï∞ÊçÆÂ∫ìËøûÊé•*/
-    public static void closeConnection(){
-        try{
-            if(conn!=null && !conn.isClosed()){
-                conn.close();
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
+	    /*πÿ±’ ˝æ›ø‚¡¨Ω”*/
+	    public static void closeConnection(){
+	        try{
+	            if(conn!=null && !conn.isClosed()){
+	                conn.close();
+	            }
+	        }catch(Exception ex){
+	            ex.printStackTrace();
+	        }
+	    }
 }

@@ -1,12 +1,10 @@
 package Dao;
 
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
-
 import java.sql.ResultSet;
 
 public class AdminDao {
     /**
-     *
+     *	Ôö¼Ó¶ÁÕß£¬¶ÁÕßÃÜÂëÓÃAES½øĞĞ¼ÓÃÜ
      * @param ReaderID
      * @param Password
      * @param Name
@@ -22,16 +20,16 @@ public class AdminDao {
      * @return
      */
     public int addReader(String ReaderID, String Password, String Name, String Sex, String Birth,
-                         String Id,String ReadClass, String NumberLending, String NumberLent,
+                         String Id,String ReadClass, 
                          String Department, String AddressHome, String Phone){
-        String sql="insert into Reader values("+ReaderID+",'"+Password+"','"+Name+"','"+Sex+
-                "','"+Birth+"','"+Id+"','"+ReadClass+"',"+Integer.valueOf(NumberLending)+","+Integer.valueOf(NumberLent)+
-                ",'"+Department+"','"+AddressHome+"','"+Phone+"')";
+        String sql="execute distinguishClass '"+ReaderID+"','"+Password+"','"+Name+"','"+Sex+
+                "','"+Birth+"','"+Id+"','"+ReadClass+
+                "','"+Department+"','"+AddressHome+"','"+Phone+"'";
         return SQLHelper.executeUpdate(sql);
     }
 
     /**
-     *
+     *	Ôö¼ÓÊé¼®
      * @param ID
      * @param BookCategories
      * @param BookName
@@ -53,7 +51,7 @@ public class AdminDao {
         return SQLHelper.executeUpdate(sql);
     }
     /**
-     * åˆ é™¤è¯»è€…
+     * É¾³ı¶ÁÕß
      */
     public int deleteReaderById(String ID) {
         String sql = "execute DeleteReader " + ID;
@@ -61,7 +59,7 @@ public class AdminDao {
     }
 
     /**
-     *
+     *	É¾³ıÊé¼®
      * @param ID
      * @return
      */
@@ -70,7 +68,7 @@ public class AdminDao {
         return SQLHelper.executeUpdate(sql);
     }
     /**
-     * è·å–å½“å‰è¯»è€…æ•°é‡
+     * »ñÈ¡µ±Ç°¶ÁÕßÊıÁ¿
      * @return
      */
     public int queryReaderCount(){
@@ -80,7 +78,7 @@ public class AdminDao {
     }
 
     /**
-     * è·å–å½“å‰è¯»è€…ä¿¡æ¯
+     * »ñÈ¡µ±Ç°¶ÁÕßĞÅÏ¢£¬¶ÁÕßµÄÃÜÂëÓÃAESËã·¨½âÃÜ
      */
     public String[][] queryReader(){
         int nums=queryReaderCount();
@@ -91,7 +89,7 @@ public class AdminDao {
             ResultSet rs=SQLHelper.executeQuery(sql);
             while(rs.next()){
                 Counter[n][0]=rs.getString(1);
-                Counter[n][1]=rs.getString(2);
+                Counter[n][1]= rs.getString(2);
                 Counter[n][2]=rs.getString(3);
                 Counter[n][4]=rs.getString(5);
                 Counter[n][3]=rs.getString(4);
@@ -112,16 +110,16 @@ public class AdminDao {
     }
 
     /**
-     * é‡ç½®è¯»è€…å¯†ç 
+     * ÖØÖÃ¶ÁÕßÃÜÂë£¬½«¶ÁÕßÃÜÂëÓë¶ÁÕßÖ¤ºÅ±£³ÖÒ»ÖÂ
      */
     public int ResetReaderPwdById(String id){
-        String pwd = id;
+        String pwd = AES.AESEncode(AES.encodeRules, id);
         String sql="update Reader set Password= '" + pwd + "' where ReaderID = '" + id + "'";
         return SQLHelper.executeUpdate(sql);
     }
 
     /**
-     * è·å–å½“å‰å€Ÿä¹¦ä¿¡æ¯æ•°é‡
+     * »ñÈ¡µ±Ç°½èÊéĞÅÏ¢ÊıÁ¿
      * @return
      */
     public int queryLoadBookCount(){
@@ -131,12 +129,12 @@ public class AdminDao {
     }
 
     /**
-     * è·å–å½“å‰å€Ÿä¹¦ä¿¡æ¯
+     * »ñÈ¡µ±Ç°½èÊéĞÅÏ¢
      * @return
      */
     public String[][] queryLoadBook() {
         int nums=queryLoadBookCount();
-        String [][] Counter=new String[nums+1][5];
+        String [][] Counter=new String[nums+1][6];
         try{
             String sql="select * from LoadBookInformation";
             int n=0;
@@ -147,6 +145,7 @@ public class AdminDao {
                 Counter[n][2]=rs.getString(3);
                 Counter[n][3]=rs.getString(4);
                 Counter[n][4]=rs.getString(5);
+                Counter[n][5]=rs.getString(6);
                 n++;
             }
             SQLHelper.closeConnection();
@@ -155,13 +154,13 @@ public class AdminDao {
         }
         return Counter;
     }
-
+    //»ñÈ¡Êé¼®±íµÄISBNµÄÊé¼®ÊıÁ¿
     public int queryISBNBookCount(){
         String sql="select count(id) from BookISBN";
         Object obj=SQLHelper.executeSingleQuery(sql);
         return Integer.parseInt(obj.toString());
     }
-
+    //»ñÈ¡Êé¼®±íµÄISBNµÄÊé¼®ĞÅÏ¢
     public String[][] queryISBNBook() {
         int nums=queryISBNBookCount();
         String [][] Counter=new String[nums+1][10];
@@ -188,13 +187,13 @@ public class AdminDao {
         }
         return Counter;
     }
-
+    //²éÑ¯ÊéºÅ±íµÄÊéÊıÁ¿
     public int queryBookCount(){
         String sql="select count(*) from Book";
         Object obj=SQLHelper.executeSingleQuery(sql);
         return Integer.parseInt(obj.toString());
     }
-
+    //²éÑ¯ÊéºÅ±íµÄÊéĞÅÏ¢
     public String[][] queryBook() {
         int nums=queryBookCount();
         String [][] Counter=new String[nums+1][3];
@@ -214,7 +213,7 @@ public class AdminDao {
         }
         return Counter;
     }
-
+    //²éÑ¯Ïà¹Ø²éÑ¯µÄĞÅÏ¢
     public int SelectReaderCount(String txtSelectReader1, String txtSelectReader2, int n){
         String sql = "";
         int m = 0;
@@ -240,7 +239,7 @@ public class AdminDao {
         }
        return m;
     }
-
+    //²éÑ¯Ïà¹Ø¶ÁÕß
     public String[][] SelectReader(String txtSelectReader1, String txtSelectReader2, int n) {
         int num = SelectReaderCount(txtSelectReader1, txtSelectReader2, n);
         String [][] Counter = new String[num][];

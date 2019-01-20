@@ -3,22 +3,37 @@ package Dao;
 import java.sql.ResultSet;
 
 public class LoginDao {
-
+	//≤È—Ø’À∫≈√‹¬Î; ‰»Îµ«¬º’À∫≈∫Õµ«¬Ω¿‡–Õ;∑µªÿ√‹¬Î
     public String SelectPassword(String ID, String type){
         String password = "";
         String sql = "";
         try{
-            if (type.equals("ËØªËÄÖ"))
+            if (type.equals("∂¡’ﬂ"))
                 sql = "select password from Reader where ReaderID = " + ID;
-            else if (type.equals("ÁÆ°ÁêÜÂëò"))
-                sql = "select password from UserLibrary where ID = " + ID;
+            else if (type.equals("π‹¿Ì‘±"))
+                sql = "select password from UserLibrary where MID = " + ID;
             ResultSet RS = SQLHelper.executeQuery(sql);
             while(RS.next())
-                password = RS.getString(1);
+                password = AES.AESDncode(AES.encodeRules, RS.getString(1));
             SQLHelper.closeConnection();
         }catch (Exception e){
             e.printStackTrace();
         }
         return password;
+    }
+    //ºÏ≤È∂¡’ﬂ”–√ª”–”‚∆⁄Œ¥ªπµƒ È,»Áπ˚”–‘Ú∑µªÿTRUE
+    public boolean SelectNoReturnBooksByReaderID(String ID) {
+    	boolean flag = false;
+    	String sql = "";
+    	try{
+            sql = "execute  NoReturnBooksByReaderID '" + ID + "'";
+            ResultSet RS = SQLHelper.executeQuery(sql);
+            while(RS.next())
+            	flag = true;
+            SQLHelper.closeConnection();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

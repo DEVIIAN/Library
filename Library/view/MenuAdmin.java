@@ -1,5 +1,6 @@
 package view;
 
+import Dao.AES;
 import Dao.AdminDao;
 
 import javax.swing.*;
@@ -22,44 +23,44 @@ public class MenuAdmin extends JFrame {
     private JPanel p_ReaderInformation =null, p_ReaderResetPWD =null, p_BookInformation = null, p_Selct = null;
     private JPanel panel=new JPanel(card);
     /**
-     *èœå•æ§ä»¶
+     *²Ëµ¥¿Ø¼ş
      */
-    private JMenu menuInformation=new JMenu("ä¿®æ”¹ä¿¡æ¯");
-    private JMenuItem itemReader =new JMenuItem("è¯»è€…ä¿¡æ¯ç®¡ç†");
-    private JMenuItem itemBook =new JMenuItem("ä¹¦ç±ä¿¡æ¯ç®¡ç†");
-    private JMenu menuResetPwd=new JMenu("é‡ç½®å¯†ç ");
-    private JMenuItem itemResetReaderPWD =new JMenuItem("é‡ç½®è¯»è€…å¯†ç ");
-    private JMenu menuSelect = new JMenu("æŸ¥è¯¢");
-    private JMenuItem itemSelectInformation = new JMenuItem("æŸ¥è¯¢ä¿¡æ¯");
-    private JMenu menuRefresh = new JMenu("åˆ·æ–°");
-    private JMenuItem itemRefresh = new JMenuItem("åˆ·æ–°ä¿¡æ¯");
+    private JMenu menuInformation=new JMenu("ĞŞ¸ÄĞÅÏ¢");
+    private JMenuItem itemReader =new JMenuItem("¶ÁÕßĞÅÏ¢¹ÜÀí");
+    private JMenuItem itemBook =new JMenuItem("Êé¼®ĞÅÏ¢¹ÜÀí");
+    private JMenu menuResetPwd=new JMenu("ÖØÖÃÃÜÂë");
+    private JMenuItem itemResetReaderPWD =new JMenuItem("ÖØÖÃ¶ÁÕßÃÜÂë");
+    private JMenu menuSelect = new JMenu("²éÑ¯");
+    private JMenuItem itemSelectInformation = new JMenuItem("²éÑ¯ĞÅÏ¢");
+    private JMenu menuRefresh = new JMenu("Ë¢ĞÂ");
+    private JMenuItem itemRefresh = new JMenuItem("Ë¢ĞÂĞÅÏ¢");
 
 
-
-    private JTable tableReaderInformation =null;                        //è¯»è€…ä¿¡æ¯è¡¨
-    private JTable tableReaderLoadBookInformation = null;               //è¯»è€…å€Ÿä¹¦è¡¨
-    private JTable tableBookInformation = null;                         //ä¹¦ç±ä¿¡æ¯è¡¨
-    private JTable tableBookID = null;                                  //ä¹¦å·è¡¨
-    private JTable tableResetReaderPWD =null;                           //è¯»è€…é‡ç½®å¯†ç è¡¨
-    private JTable tableSelect = null;                                  //æŸ¥è¯¢ç•Œé¢è¯»è€…è¡¨
+    //±í¸ñ
+    private JTable tableReaderInformation =null;                        //¶ÁÕßĞÅÏ¢±í
+    private JTable tableReaderLoadBookInformation = null;               //¶ÁÕß½èÊé±í
+    private JTable tableBookInformation = null;                         //Êé¼®ĞÅÏ¢±í
+    private JTable tableBookID = null;                                  //ÊéºÅ±í
+    private JTable tableResetReaderPWD =null;                           //¶ÁÕßÖØÖÃÃÜÂë±í
+    private JTable tableSelect = null;                                  //²éÑ¯½çÃæ¶ÁÕß±í
     /**
-     * p_ReaderInformationæ§ä»¶ï¼Œè¯»è€…ä¿¡æ¯
+     * p_ReaderInformation¿Ø¼ş£¬¶ÁÕßĞÅÏ¢
      */
-    private JButton btnResetReaderPWD =new JButton("é‡ç½®å¯†ç ");
-    private JButton btnRefreshReset = new JButton("åˆ·æ–°");
-    private JButton btnAddReader =new JButton("å¢åŠ è¯»è€…");
-    private JButton btnDeleteReader =new JButton("åˆ é™¤è¯»è€…");
-    private JButton btnExit1 =new JButton("é€€å‡ºç³»ç»Ÿ");
-    private JLabel lblIdReader =new JLabel("è¯»è€…è¯å·");
-    private JLabel lblPwdReader =new JLabel("å¯†ç ");
-    private JLabel lblName=new JLabel("å§“å");
-    private JLabel lblSex=new JLabel("æ€§åˆ«");
-    private JLabel lblBirth =new JLabel("å‡ºç”Ÿæ—¥æœŸ");
-    private JLabel lblID =new JLabel("èº«ä»½è¯å·");
-    private JLabel lblReadClass =new JLabel("å€Ÿä¹¦ç­‰çº§");
-    private JLabel lblDepartment=new JLabel("å·¥ä½œéƒ¨é—¨");
-    private JLabel lblAdressHome=new JLabel("å®¶åº­ä½å€");
-    private JLabel lblPhone=new JLabel("è”ç³»æ–¹å¼");
+    private JButton btnResetReaderPWD =new JButton("ÖØÖÃÃÜÂë");
+    private JButton btnRefreshReset = new JButton("Ë¢ĞÂ");
+    private JButton btnAddReader =new JButton("Ôö¼Ó¶ÁÕß");
+    private JButton btnDeleteReader =new JButton("É¾³ı¶ÁÕß");
+    private JButton btnExit1 =new JButton("ÍË³öÏµÍ³");
+    private JLabel lblIdReader =new JLabel("¶ÁÕßÖ¤ºÅ");
+    private JLabel lblPwdReader =new JLabel("ÃÜÂë");
+    private JLabel lblName=new JLabel("ĞÕÃû");
+    private JLabel lblSex=new JLabel("ĞÔ±ğ");
+    private JLabel lblBirth =new JLabel("³öÉúÈÕÆÚ");
+    private JLabel lblID =new JLabel("Éí·İÖ¤ºÅ");
+    private JLabel lblReadClass =new JLabel("½èÊéµÈ¼¶");
+    private JLabel lblDepartment=new JLabel("¹¤×÷²¿ÃÅ");
+    private JLabel lblAdressHome=new JLabel("¼ÒÍ¥×¡Ö·");
+    private JLabel lblPhone=new JLabel("ÁªÏµ·½Ê½");
 
     private JTextField txtIdReader =new JTextField(10);
     private JTextField txtPwdReader =new JTextField(18);
@@ -75,17 +76,17 @@ public class MenuAdmin extends JFrame {
 
 
     /**
-     * p_BookInformationæ§ä»¶ï¼Œä¹¦ç±ä¿¡æ¯
+     * p_BookInformation¿Ø¼ş£¬Êé¼®ĞÅÏ¢
      */
-    private JLabel lblISBNId =new JLabel("ä¹¦ç±ISBNå·");
-    private JLabel lblBookCategories =new JLabel("ä¹¦ç±ç±»åˆ«");
-    private JLabel lblBookName=new JLabel("ä¹¦å");
-    private JLabel lblAuthor=new JLabel("ä½œè€…");
-    private JLabel lblPublishingHouse =new JLabel("å‡ºç‰ˆç¤¾");
-    private JLabel lblPublictionDate =new JLabel("å‡ºç‰ˆæ—¥æœŸ");
-    private JLabel lblNumberLibrary =new JLabel("å›¾ä¹¦é¦†è—ä¹¦æ•°é‡");
-    private JLabel lblPrice=new JLabel("ä¹¦ç±ä»·æ ¼");
-    private JLabel lblBookIntroduce=new JLabel("ä¹¦ç±æè¿°");
+    private JLabel lblISBNId =new JLabel("Êé¼®ISBNºÅ");
+    private JLabel lblBookCategories =new JLabel("Êé¼®Àà±ğ");
+    private JLabel lblBookName=new JLabel("ÊéÃû");
+    private JLabel lblAuthor=new JLabel("×÷Õß");
+    private JLabel lblPublishingHouse =new JLabel("³ö°æÉç");
+    private JLabel lblPublictionDate =new JLabel("³ö°æÈÕÆÚ");
+    private JLabel lblNumberLibrary =new JLabel("Í¼Êé¹İ²ØÊéÊıÁ¿");
+    private JLabel lblPrice=new JLabel("Êé¼®¼Û¸ñ");
+    private JLabel lblBookIntroduce=new JLabel("Êé¼®ÃèÊö");
 
     private JTextField txtISBNID =new JTextField(8);
     private JTextField txtBookCategories =new JTextField(50);
@@ -97,17 +98,17 @@ public class MenuAdmin extends JFrame {
     private JTextField txtPrice =new JTextField(10);
     private JTextField txtBookIntroduce =new JTextField(100);
 
-    private JButton btnAddBook =new JButton("å¢åŠ ä¹¦ç±");
-    private JButton btnDeleteBook =new JButton("åˆ é™¤ä¹¦ç±");
-    private JButton btnExit2 =new JButton("é€€å‡ºç³»ç»Ÿ");
+    private JButton btnAddBook =new JButton("Ôö¼ÓÊé¼®");
+    private JButton btnDeleteBook =new JButton("É¾³ıÊé¼®");
+    private JButton btnExit2 =new JButton("ÍË³öÏµÍ³");
 
     /**
-     *  æŸ¥è¯¢ç•Œé¢
+     *  ²éÑ¯½çÃæ
      */
     private JComboBox cbSelect = new JComboBox();
-    private JButton btnSelect = new JButton("æŸ¥è¯¢");
-    private JLabel lbltemp1 = new JLabel("é¡¹ç›®ä¸€");
-    private JLabel lbltemp2 = new JLabel("é¡¹ç›®äºŒ");
+    private JButton btnSelect = new JButton("²éÑ¯");
+    private JLabel lbltemp1 = new JLabel("ÏîÄ¿Ò»");
+    private JLabel lbltemp2 = new JLabel("ÏîÄ¿¶ş");
     private JTextField txtSelect1 = new JTextField(50);
     private JTextField txtSelect2 = new JTextField(50);
     private JTextField txtHint1 = new JTextField(50);
@@ -119,7 +120,7 @@ public class MenuAdmin extends JFrame {
 
     public MenuAdmin(){
         /**
-         *  labelå±…ä¸­æ˜¾ç¤º
+         *  label¾ÓÖĞÏÔÊ¾
          */
         lblIdReader.setHorizontalAlignment(SwingConstants.CENTER);
         lblPwdReader.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,7 +144,7 @@ public class MenuAdmin extends JFrame {
         lbltemp1.setHorizontalAlignment(SwingConstants.CENTER);
         lbltemp2.setHorizontalAlignment(SwingConstants.CENTER);
         /**
-         *èœå•æ˜¾ç¤º
+         *²Ëµ¥ÏÔÊ¾
          */
         menuInformation.add(itemReader);menuInformation.addSeparator();
         menuInformation.add(itemBook);
@@ -153,29 +154,31 @@ public class MenuAdmin extends JFrame {
         menuBar.add(menuInformation);menuBar.add(menuResetPwd);menuBar.add(menuSelect);menuBar.add(menuRefresh);
 
 
-        this.validate();
+        this.validate();			//È·±£×é¼ş¾ßÓĞÓĞĞ§µÄ²¼¾Ö¡£
         p_ReaderInformation =new JPanel();
         p_ReaderResetPWD =new JPanel();
         p_BookInformation = new JPanel();
         p_Selct = new JPanel();
 
-
+        //³õÊ¼»¯±í¸ñ
         initTableReaderInformation();initTableLoadBookInformation();
         initTableBookISBNInformation();initTableBookInformation();initTableSelectReader();
-
+        
+        //²¼¾ÖÎª¿¨Æ¬²¼¾Ö
+        
         /**
-         *è¯»è€…ä¿¡æ¯å¸ƒå±€
+         *¶ÁÕßĞÅÏ¢²¼¾Ö
          */
-
+        //±ß½ç²¼¾Ö£¬¶«Î÷ÄÏ±±ÖĞ
         p_ReaderInformation.setLayout(new BorderLayout());
         JPanel jp_ReaderAdd=new JPanel();
         JPanel jp_Table = new JPanel();
         JPanel jp_ReaderSouth=new JPanel();
         JScrollPane jspReaderInformation=new JScrollPane(tableReaderInformation);
         JScrollPane jspLoadBookInformation = new JScrollPane(tableReaderLoadBookInformation);
-
-        cbReadClass.addItem("1");cbReadClass.addItem("2");
-        cbSex.addItem("ç”·");cbSex.addItem("å¥³");
+        
+        cbReadClass.addItem("±¾¿ÆÉú");cbReadClass.addItem("ÑĞ¾¿Éú");cbReadClass.addItem("²©Ê¿");cbReadClass.addItem("½ÌÊ¦");
+        cbSex.addItem("ÄĞ");cbSex.addItem("Å®");
         txtPwdReader.setEditable(false);
         jp_Table.setLayout(new GridLayout(2,1));
         jp_Table.add(jspReaderInformation);jp_Table.add(jspLoadBookInformation);
@@ -198,7 +201,7 @@ public class MenuAdmin extends JFrame {
             }
         });
 
-        /******************å¢åŠ ä¸€ä¸ªäºº*********************************/
+        /******************Ôö¼ÓÒ»¸öÈË*********************************/
         btnAddReader.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -206,7 +209,7 @@ public class MenuAdmin extends JFrame {
             }
         });
 
-        /*******************åˆ é™¤ä¸€ä¸ªäºº*****************************/
+        /*******************É¾³ıÒ»¸öÈË*****************************/
         btnDeleteReader.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -214,7 +217,7 @@ public class MenuAdmin extends JFrame {
             }
         });
 
-        /**********************é€€å‡ºç³»ç»Ÿ***************************/
+        /**********************ÍË³öÏµÍ³***************************/
         btnExit1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -222,7 +225,7 @@ public class MenuAdmin extends JFrame {
             }
         });
         /**
-         * é‡ç½®è¯»è€…å¯†ç 
+         * ÖØÖÃ¶ÁÕßÃÜÂë
          */
         JScrollPane jspResetPWDReader=new JScrollPane(tableResetReaderPWD);
         p_ReaderResetPWD.setLayout(new BorderLayout());
@@ -241,7 +244,7 @@ public class MenuAdmin extends JFrame {
                 itemRefresh_Clicked();
             }
         });
-        /******************é‡ç½®å¯†ç *********************************/
+        /******************ÖØÖÃÃÜÂë********************/
         btnResetReaderPWD.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -249,7 +252,7 @@ public class MenuAdmin extends JFrame {
             }
         });
 
-
+        /******************ÍË³öÏµÍ³*********************/
         btnExit2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -257,8 +260,9 @@ public class MenuAdmin extends JFrame {
             }
         });
         /**
-         *  ä¹¦ç±ä¿¡æ¯
+         *  Êé¼®ĞÅÏ¢
          */
+        //±ß½ç²¼¾Ö£¬¶«Î÷ÄÏ±±ÖĞ
         p_BookInformation.setLayout(new BorderLayout());
         JPanel jp_AddBook = new JPanel();JPanel jp_AddBookNorth = new JPanel(); JPanel jp_AddBookSouth = new JPanel();
         JPanel jp_Table_Book = new JPanel();
@@ -290,14 +294,14 @@ public class MenuAdmin extends JFrame {
             }
         });
 
-        /*******************å¢åŠ ä¸€æœ¬ä¹¦***************************/
+        /*******************Ôö¼ÓÒ»±¾Êé***************************/
         btnAddBook.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 btnAddBook_Clicked();
             }
         });
-        /*******************åˆ é™¤ä¸€æœ¬ä¹¦****************************/
+        /*******************É¾³ıÒ»±¾Êé****************************/
         btnDeleteBook.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -306,15 +310,17 @@ public class MenuAdmin extends JFrame {
         });
 
         /**
-         * æŸ¥è¯¢ä¿¡æ¯
+         * ²éÑ¯ĞÅÏ¢
          */
-        cbSelect.addItem("æŸ¥è¯¢è¯»è€…å·²å€Ÿä¹¦ä¿¡æ¯");
-        cbSelect.addItem("æŸ¥è¯¢è¯»è€…ä¸ªäººä¿¡æ¯");
-        cbSelect.addItem("æŸ¥è¯¢å·²åˆ°å½’è¿˜æ—¶é—´ä½†æœªè¿˜ä¹¦çš„è¯»è€…");
-        cbSelect.addItem("æŸ¥è¯¢åˆ°æœŸæœªè¿˜çš„å›¾ä¹¦");
-        cbSelect.addItem("ç»Ÿè®¡æŸä¸€æ®µæ—¶é—´å†…æ‰€æœ‰ç±»åˆ«å›¾ä¹¦çš„å€Ÿé˜…æ¬¡æ•°");
-
+        cbSelect.addItem("²éÑ¯¶ÁÕßÒÑ½èÊéĞÅÏ¢");
+        cbSelect.addItem("²éÑ¯¶ÁÕß¸öÈËĞÅÏ¢");
+        cbSelect.addItem("²éÑ¯ÒÑµ½¹é»¹Ê±¼äµ«Î´»¹ÊéµÄ¶ÁÕß");
+        cbSelect.addItem("²éÑ¯µ½ÆÚÎ´»¹µÄÍ¼Êé");
+        cbSelect.addItem("Í³¼ÆÄ³Ò»¶ÎÊ±¼äÄÚËùÓĞÀà±ğÍ¼ÊéµÄ½èÔÄ´ÎÊı");
+        
+        //±ß½ç²¼¾Ö£¬¶«Î÷ÄÏ±±ÖĞ
         p_Selct.setLayout(new BorderLayout());
+        //Íø¸ñ²¼¾Ö
         JPanel jp_SelectNorth = new JPanel(new GridLayout(3,2));
         JPanel jp_SelectTable = new JPanel(new GridLayout(1,1));
         JPanel jp_SelectSouth = new JPanel(new GridLayout(6,1));
@@ -323,12 +329,12 @@ public class MenuAdmin extends JFrame {
         jp_SelectNorth.add(lbltemp1);jp_SelectNorth.add(txtSelect1);
         jp_SelectNorth.add(lbltemp2);jp_SelectNorth.add(txtSelect2);
         jp_SelectTable.add(jsp_tableSelect);
-        txtHint1.setText("å¡«ç©ºæç¤º:(æœªä½¿ç”¨å‰ï¼Œé»˜è®¤æŸ¥è¯¢å·²åˆ°å½’è¿˜æ—¶é—´ä½†æœªè¿˜ä¹¦çš„è¯»è€…)");
-        txtHint2.setText(" 1ã€æŸ¥è¯¢è¯»è€…å·²å€Ÿä¹¦ä¿¡æ¯æ—¶ï¼Œåªéœ€å¡«å†™é¡¹ç›®ä¸€ï¼Œé¡¹ç›®ä¸ºå­¦å·");
-        txtHint3.setText(" 2ã€æŸ¥è¯¢è¯»è€…ä¸ªäººä¿¡æ¯ï¼Œéœ€å¡«å†™é¡¹ç›®ä¸€ã€é¡¹ç›®äºŒï¼Œé¡¹ç›®ä¸€ä¸ºå­¦å·ï¼Œé¡¹ç›®äºŒä¸ºå§“å");
-        txtHint4.setText(" 3ã€æŸ¥è¯¢å·²åˆ°å½’è¿˜æ—¶é—´ä½†æœªè¿˜ä¹¦çš„è¯»è€…ï¼Œä¸ç”¨å¡«å†™");
-        txtHint5.setText(" 4ã€æŸ¥è¯¢åˆ°æœŸæœªè¿˜çš„å›¾ä¹¦ï¼Œä¸ç”¨å¡«å†™");
-        txtHint6.setText(" 5ã€ç»Ÿè®¡æŸä¸€æ®µæ—¶é—´å†…æ‰€æœ‰ç±»åˆ«å›¾ä¹¦çš„å€Ÿé˜…æ¬¡æ•°ï¼Œéœ€å¡«å†™é¡¹ç›®ä¸€ã€é¡¹ç›®äºŒï¼Œé¡¹ç›®ä¸€å’Œé¡¹ç›®äºŒå‡ä¸ºæ—¶é—´ï¼Œé¡¹ç›®ä¸€æ—¶é—´åº”åœ¨é¡¹ç›®äºŒä¹‹å‰ã€‚æ—¥æœŸæ ¼å¼ä¸ºyyyy-mm-dd");
+        txtHint1.setText("Ìî¿ÕÌáÊ¾:(Î´Ê¹ÓÃÇ°£¬Ä¬ÈÏ²éÑ¯ÒÑµ½¹é»¹Ê±¼äµ«Î´»¹ÊéµÄ¶ÁÕß)");
+        txtHint2.setText(" 1¡¢²éÑ¯¶ÁÕßÒÑ½èÊéĞÅÏ¢Ê±£¬Ö»ĞèÌîĞ´ÏîÄ¿Ò»£¬ÏîÄ¿ÎªÑ§ºÅ");
+        txtHint3.setText(" 2¡¢²éÑ¯¶ÁÕß¸öÈËĞÅÏ¢£¬ĞèÌîĞ´ÏîÄ¿Ò»¡¢ÏîÄ¿¶ş£¬ÏîÄ¿Ò»ÎªÑ§ºÅ£¬ÏîÄ¿¶şÎªĞÕÃû");
+        txtHint4.setText(" 3¡¢²éÑ¯ÒÑµ½¹é»¹Ê±¼äµ«Î´»¹ÊéµÄ¶ÁÕß£¬²»ÓÃÌîĞ´");
+        txtHint5.setText(" 4¡¢²éÑ¯µ½ÆÚÎ´»¹µÄÍ¼Êé£¬²»ÓÃÌîĞ´");
+        txtHint6.setText(" 5¡¢Í³¼ÆÄ³Ò»¶ÎÊ±¼äÄÚËùÓĞÀà±ğÍ¼ÊéµÄ½èÔÄ´ÎÊı£¬ĞèÌîĞ´ÏîÄ¿Ò»¡¢ÏîÄ¿¶ş£¬ÏîÄ¿Ò»ºÍÏîÄ¿¶ş¾ùÎªÊ±¼ä£¬ÏîÄ¿Ò»Ê±¼äÓ¦ÔÚÏîÄ¿¶şÖ®Ç°¡£ÈÕÆÚ¸ñÊ½Îªyyyy-mm-dd");
         txtHint1.setEditable(false);txtHint2.setEditable(false);txtHint3.setEditable(false);
         txtHint4.setEditable(false);txtHint5.setEditable(false);txtHint6.setEditable(false);
         jp_SelectSouth.add(txtHint1);jp_SelectSouth.add(txtHint2);jp_SelectSouth.add(txtHint3);
@@ -355,33 +361,33 @@ public class MenuAdmin extends JFrame {
         this.getContentPane().add(panel);
         this.getContentPane().add(p, BorderLayout.SOUTH);
         this.setVisible(true);
-        double width = Toolkit.getDefaultToolkit().getScreenSize().width; //å¾—åˆ°å½“å‰å±å¹•åˆ†è¾¨ç‡çš„é«˜
-        double height = Toolkit.getDefaultToolkit().getScreenSize().height;//å¾—åˆ°å½“å‰å±å¹•åˆ†è¾¨ç‡çš„å®½
+        double width = Toolkit.getDefaultToolkit().getScreenSize().width; //µÃµ½µ±Ç°ÆÁÄ»·Ö±æÂÊµÄ¸ß
+        double height = Toolkit.getDefaultToolkit().getScreenSize().height;//µÃµ½µ±Ç°ÆÁÄ»·Ö±æÂÊµÄ¿í
         this.setSize((int)width,(int)height);
-        this.setTitle("ç®¡ç†å‘˜");
+        this.setTitle("¹ÜÀíÔ±");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    //²Ëµ¥ÖĞË¢ĞÂ°´Å¥µã»÷ÊÂ¼ş
     private void itemRefresh_Clicked() {
         updateTableReader();
         updateTableBook();
         updateTableISBNBook();
         updateTableLoadBook();
         String selectItem = String.valueOf(cbSelect.getSelectedItem());
-        if (selectItem.equals("æŸ¥è¯¢è¯»è€…å·²å€Ÿä¹¦ä¿¡æ¯")){
+        if (selectItem.equals("²éÑ¯¶ÁÕßÒÑ½èÊéĞÅÏ¢")){
             updateTableSelect(1);
-        }else if (selectItem.equals("æŸ¥è¯¢è¯»è€…ä¸ªäººä¿¡æ¯")){
+        }else if (selectItem.equals("²éÑ¯¶ÁÕß¸öÈËĞÅÏ¢")){
             updateTableSelect(2);
-        }else if (selectItem.equals("æŸ¥è¯¢å·²åˆ°å½’è¿˜æ—¶é—´ä½†æœªè¿˜ä¹¦çš„è¯»è€…")){
+        }else if (selectItem.equals("²éÑ¯ÒÑµ½¹é»¹Ê±¼äµ«Î´»¹ÊéµÄ¶ÁÕß")){
             updateTableSelect(3);
-        }else if (selectItem.equals("æŸ¥è¯¢åˆ°æœŸæœªè¿˜çš„å›¾ä¹¦")){
+        }else if (selectItem.equals("²éÑ¯µ½ÆÚÎ´»¹µÄÍ¼Êé")){
             updateTableSelect(4);
-        }else if (selectItem.equals("ç»Ÿè®¡æŸä¸€æ®µæ—¶é—´å†…æ‰€æœ‰ç±»åˆ«å›¾ä¹¦çš„å€Ÿé˜…æ¬¡æ•°")){
+        }else if (selectItem.equals("Í³¼ÆÄ³Ò»¶ÎÊ±¼äÄÚËùÓĞÀà±ğÍ¼ÊéµÄ½èÔÄ´ÎÊı")){
             updateTableSelect(5);
         }
     }
 
-
+    //Ôö¼ÓÊé¼®
     private void btnAddBook_Clicked() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String ISBNID = txtISBNID.getText().trim();
@@ -403,39 +409,40 @@ public class MenuAdmin extends JFrame {
                             if (isValidDate(PublicationDate) && isBefore(PublicationDate, df.format(new Date())) &&
                                     isBefore("1900-1-1", PublicationDate)){
                                 if(Dao.addBook(ISBNID,BookCategories,BookName,Author,PublishingHouse,PublicationDate,NumberLibrary,NumberLoad,Price,BookIntroduce)>0){
-                                    JOptionPane.showMessageDialog(this, "æ³¨å†ŒæˆåŠŸ");
+                                    JOptionPane.showMessageDialog(this, "×¢²á³É¹¦");
                                     updateTableISBNBook();updateTableBook();
                                     clearBook();
                                 }
                                 else
-                                    JOptionPane.showMessageDialog(this, "æ³¨å†Œå¤±è´¥");
+                                    JOptionPane.showMessageDialog(this, "×¢²áÊ§°Ü");
                             }
                             else
-                                JOptionPane.showMessageDialog(this, "æ—¶é—´æ ¼å¼ä¸æ­£ç¡®ï¼Œå¿…é¡»ä¸ºyyyy-mm-dd,å¹¶åœ¨1900-1-1è‡³ä»Š");
+                                JOptionPane.showMessageDialog(this, "Ê±¼ä¸ñÊ½²»ÕıÈ·£¬±ØĞëÎªyyyy-mm-dd,²¢ÔÚ1900-1-1ÖÁ½ñ");
                         }
                         else
-                            JOptionPane.showMessageDialog(this, "ä¹¦ç±ä»·æ ¼ä¸å¾—è¶…è¿‡ä¸€ä¸‡");
+                            JOptionPane.showMessageDialog(this, "Êé¼®¼Û¸ñ²»µÃ³¬¹ıÒ»Íò");
                     }
                     else
-                        JOptionPane.showMessageDialog(this, "ä»·æ ¼å¿…é¡»ä¸ºæ­£æµ®ç‚¹æ•°");
+                        JOptionPane.showMessageDialog(this, "¼Û¸ñ±ØĞëÎªÕı¸¡µãÊı");
                 }else
-                    JOptionPane.showMessageDialog(this, "é¦†è—æ•°é‡å¿…é¡»ä¸ºæ­£æ•´æ•°,å¹¶ä¸”ä¸èƒ½è¶…è¿‡ä¸€åƒæœ¬");
+                    JOptionPane.showMessageDialog(this, "¹İ²ØÊıÁ¿±ØĞëÎªÕıÕûÊı,²¢ÇÒ²»ÄÜ³¬¹ıÒ»Ç§±¾");
             }
            else
-                JOptionPane.showMessageDialog(this, "ISBNå·å¿…é¡»ä¸ºæ­£æ•´æ•°å¹¶ä¸”ä¸º5ä½");
+                JOptionPane.showMessageDialog(this, "ISBNºÅ±ØĞëÎªÕıÕûÊı²¢ÇÒÎª5Î»");
 
 
         }else
-            JOptionPane.showMessageDialog(this, "ä¿¡æ¯å‡ä¸ºå¿…å¡«");
+            JOptionPane.showMessageDialog(this, "ĞÅÏ¢¾ùÎª±ØÌî");
 
     }
-
+    //Ôö¼Ó¶ÁÕß
     private void btnAddReader_Clicked(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();
         c1.add(Calendar.YEAR, -16);
         String ReaderID = txtIdReader.getText().trim();
-        String Password = ReaderID;
+        //¶ÔÃÜÂë½øĞĞ¼ÓÃÜ
+        String Password =AES.AESEncode("20162151", ReaderID) ;
         String Name =txtName.getText().trim();
         String Sex = String.valueOf(cbSex.getSelectedItem());
         String Birth = txtBirth.getText().trim();
@@ -459,124 +466,127 @@ public class MenuAdmin extends JFrame {
                         if (ID.length() == 18){
                             String ID_1 = ID.substring(0,17);
                             if (isNumericInt(ID_1)){
-                                if(Dao.addReader(ReaderID, Password, Name, Sex, Birth, ID, ReadClass, NumberLending, NumberLent,
+                                if(Dao.addReader(ReaderID, Password, Name, Sex, Birth, ID, ReadClass,
                                         Department, AddressHome, Phone)>0){
-                                    JOptionPane.showMessageDialog(this, "æ³¨å†ŒæˆåŠŸ");
+                                    JOptionPane.showMessageDialog(this, "×¢²á³É¹¦");
                                     updateTableReader();updateTableLoadBook();
                                     clearReader();
                                 }
                                 else
-                                    JOptionPane.showMessageDialog(this, "æ³¨å†Œå¤±è´¥");
+                                    JOptionPane.showMessageDialog(this, "×¢²áÊ§°Ü");
                             }
                             else
-                                JOptionPane.showMessageDialog(this, "è¯»è€…çš„èº«ä»½è¯å·å‰17ä½å¿…é¡»æ˜¯æ­£æ•´æ•°");
+                                JOptionPane.showMessageDialog(this, "¶ÁÕßµÄÉí·İÖ¤ºÅÇ°17Î»±ØĞëÊÇÕıÕûÊı");
                         }
                         else
-                            JOptionPane.showMessageDialog(this, "è¯»è€…çš„èº«ä»½è¯å¿…é¡»ä¸º18ä½");
+                            JOptionPane.showMessageDialog(this, "¶ÁÕßµÄÉí·İÖ¤±ØĞëÎª18Î»");
                     }
                     else
-                        JOptionPane.showMessageDialog(this, "è¯»è€…è”ç³»æ–¹å¼å¿…é¡»ä¸º11ä½æ•´æ•°");
+                        JOptionPane.showMessageDialog(this, "¶ÁÕßÁªÏµ·½Ê½±ØĞëÎª11Î»ÕûÊı");
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "è¯»è€…å¿…é¡»æ»¡16å‘¨å²ï¼Œå¹¶ä¸”å‡ºç”Ÿæ—¥æœŸæ ¼å¼ä¸º yyyy-mm-dd,å‡ºç”Ÿæ—¥æœŸä¸å¾—æ—©äº1900-1-1");
+                    JOptionPane.showMessageDialog(this, "¶ÁÕß±ØĞëÂú16ÖÜËê£¬²¢ÇÒ³öÉúÈÕÆÚ¸ñÊ½Îª yyyy-mm-dd,³öÉúÈÕÆÚ²»µÃÔçÓÚ1900-1-1");
             }
             else
-                JOptionPane.showMessageDialog(this, "è¯»è€…è¯å·å¿…é¡»ä¸º8ä½æ•´æ•°");
+                JOptionPane.showMessageDialog(this, "¶ÁÕßÖ¤ºÅ±ØĞëÎª8Î»ÕûÊı");
         }
         else
-            JOptionPane.showMessageDialog(this, "ä¿¡æ¯å‡ä¸ºå¿…å¡«");
+            JOptionPane.showMessageDialog(this, "ĞÅÏ¢¾ùÎª±ØÌî");
     }
-
+    //ÖØÖÃ¶ÁÕßÃÜÂë
     private void btnResetReaderPWD_Clicked(){
         int rowIndexReader= tableResetReaderPWD.getSelectedRow();
         if(rowIndexReader>-1){
-            int r=JOptionPane.showConfirmDialog(this, "æ˜¯å¦é‡ç½®å¯†ç ", "é‡ç½®å¯†ç ",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
+            int r=JOptionPane.showConfirmDialog(this, "ÊÇ·ñÖØÖÃÃÜÂë", "ÖØÖÃÃÜÂë",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
             if(r==JOptionPane.OK_OPTION){
                 String id= tableResetReaderPWD.getValueAt(rowIndexReader, 0).toString();
                 if(Dao.ResetReaderPwdById(id)>0){
-                    JOptionPane.showMessageDialog(this, "é‡ç½®å¯†ç æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "ÖØÖÃÃÜÂë³É¹¦");
                     updateTableReader();
                 }else
-                    JOptionPane.showMessageDialog(this, "é‡ç½®å¯†ç å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "ÖØÖÃÃÜÂëÊ§°Ü");
             }
-        }
+        }else
+        	JOptionPane.showMessageDialog(this, "Î´Ñ¡ÖĞ");
     }
-
+    //É¾³ı¶ÁÕß
     private void btnDeleteReader_Clicked(){
 
         int rowIndexReader= tableReaderInformation.getSelectedRow();
 
          if(rowIndexReader>-1){
-            int r=JOptionPane.showConfirmDialog(this, "æ˜¯å¦åˆ é™¤", "åˆ é™¤è¯»è€…",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
+            int r=JOptionPane.showConfirmDialog(this, "ÊÇ·ñÉ¾³ı", "É¾³ı¶ÁÕß",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
             if(r==JOptionPane.OK_OPTION){
                 String id= tableReaderInformation.getValueAt(rowIndexReader, 0).toString();
                 if(Dao.deleteReaderById(id)>0){
-                    JOptionPane.showMessageDialog(this, "åˆ é™¤æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "É¾³ı³É¹¦");
                     updateTableReader();updateTableLoadBook();
                 }else{
-                    JOptionPane.showMessageDialog(this, "åˆ é™¤å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "É¾³ıÊ§°Ü");
                     updateTableReader();updateTableLoadBook();
                 }
             }
-        }
+        }else
+        	JOptionPane.showMessageDialog(this, "Î´Ñ¡ÖĞ");
     }
-
+    //É¾³ıÊé¼®
     private void btnDeleteBook_Clicked() {
         int rowIndexReader= tableBookInformation.getSelectedRow();
         if(rowIndexReader>-1){
-            int r=JOptionPane.showConfirmDialog(this, "æ˜¯å¦åˆ é™¤", "åˆ é™¤ä¹¦ç±",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
+            int r=JOptionPane.showConfirmDialog(this, "ÊÇ·ñÉ¾³ı", "É¾³ıÊé¼®",JOptionPane.OK_CANCEL_OPTION ,JOptionPane.INFORMATION_MESSAGE);
             if(r==JOptionPane.OK_OPTION){
                 String id= tableBookInformation.getValueAt(rowIndexReader, 0).toString();
                 if(Dao.deleteBook(id)>0){
-                    JOptionPane.showMessageDialog(this, "åˆ é™¤æˆåŠŸ");
+                    JOptionPane.showMessageDialog(this, "É¾³ı³É¹¦");
                     updateTableBook();updateTableISBNBook();
                 }else{
-                    JOptionPane.showMessageDialog(this, "åˆ é™¤å¤±è´¥");
+                    JOptionPane.showMessageDialog(this, "É¾³ıÊ§°Ü");
                     updateTableISBNBook();updateTableBook();
                 }
 
             }
-        }
+        }else
+        	JOptionPane.showMessageDialog(this, "Î´Ñ¡ÖĞ");
     }
-
+    //²éÑ¯
     private void btnSelect_Clicked() {
         String selectItem = String.valueOf(cbSelect.getSelectedItem());
         String selectInformation1 = txtSelect1.getText().trim();
         String selectInformation2 = txtSelect2.getText().trim();
-        if (selectItem.equals("æŸ¥è¯¢è¯»è€…å·²å€Ÿä¹¦ä¿¡æ¯")){
+        if (selectItem.equals("²éÑ¯¶ÁÕßÒÑ½èÊéĞÅÏ¢")){
             if (selectInformation1.equals("")){
-                JOptionPane.showMessageDialog(this, "æŸ¥è¯¢æ¡ä»¶ä¸èƒ½ä¸ºç©º");
+                JOptionPane.showMessageDialog(this, "²éÑ¯Ìõ¼ş²»ÄÜÎª¿Õ");
             }else{
                 updateTableSelect(1);
             }
-        }else if (selectItem.equals("æŸ¥è¯¢è¯»è€…ä¸ªäººä¿¡æ¯")){
+        }else if (selectItem.equals("²éÑ¯¶ÁÕß¸öÈËĞÅÏ¢")){
             if (!selectInformation1.equals("") && !selectInformation2.equals("")){
                 updateTableSelect(2);
             }
            else
-               JOptionPane.showMessageDialog(this, "æŸ¥è¯¢æ¡ä»¶ä¸èƒ½ä¸ºç©º");
-        }else if (selectItem.equals("æŸ¥è¯¢å·²åˆ°å½’è¿˜æ—¶é—´ä½†æœªè¿˜ä¹¦çš„è¯»è€…")){
+               JOptionPane.showMessageDialog(this, "²éÑ¯Ìõ¼ş²»ÄÜÎª¿Õ");
+        }else if (selectItem.equals("²éÑ¯ÒÑµ½¹é»¹Ê±¼äµ«Î´»¹ÊéµÄ¶ÁÕß")){
             txtSelect1.setText("");txtSelect2.setText("");
             updateTableSelect(3);
-        }else if (selectItem.equals("æŸ¥è¯¢åˆ°æœŸæœªè¿˜çš„å›¾ä¹¦")){
+        }else if (selectItem.equals("²éÑ¯µ½ÆÚÎ´»¹µÄÍ¼Êé")){
             txtSelect1.setText("");txtSelect2.setText("");
             updateTableSelect(4);
-        }else if (selectItem.equals("ç»Ÿè®¡æŸä¸€æ®µæ—¶é—´å†…æ‰€æœ‰ç±»åˆ«å›¾ä¹¦çš„å€Ÿé˜…æ¬¡æ•°")){
+        }else if (selectItem.equals("Í³¼ÆÄ³Ò»¶ÎÊ±¼äÄÚËùÓĞÀà±ğÍ¼ÊéµÄ½èÔÄ´ÎÊı")){
             if (!selectInformation1.equals("") && !selectInformation2.equals("")){
                 if (isValidDate(txtSelect1.getText().trim()) && isValidDate(txtSelect2.getText().trim())){
                     if (isBefore(txtSelect1.getText().trim(), txtSelect2.getText().trim()))
                         updateTableSelect(5);
                     else
-                        JOptionPane.showMessageDialog(this, "é¡¹ç›®ä¸€çš„æ—¥æœŸä¸åœ¨é¡¹ç›®äºŒçš„æ—¥æœŸä¹‹å‰");
+                        JOptionPane.showMessageDialog(this, "ÏîÄ¿Ò»µÄÈÕÆÚ²»ÔÚÏîÄ¿¶şµÄÈÕÆÚÖ®Ç°");
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "æŸ¥è¯¢æ—¥æœŸæ ¼å¼ä¸æ­£ç¡®ï¼Œå¿…é¡»ä¸ºyyyy-mm-dd");
+                    JOptionPane.showMessageDialog(this, "²éÑ¯ÈÕÆÚ¸ñÊ½²»ÕıÈ·£¬±ØĞëÎªyyyy-mm-dd");
             }
            else
-               JOptionPane.showMessageDialog(this, "æŸ¥è¯¢æ¡ä»¶ä¸èƒ½ä¸ºç©º");
+               JOptionPane.showMessageDialog(this, "²éÑ¯Ìõ¼ş²»ÄÜÎª¿Õ");
         }
     }
-
+    //½«Ôö¼Ó¶ÁÕß½çÃæµÄËùÓĞÎÄ±¾¿òÇå¿Õ
     private void clearReader(){
         txtPhone.setText("");
         txtIdReader.setText("");
@@ -586,7 +596,7 @@ public class MenuAdmin extends JFrame {
         txtID.setText("");
         txtDepartment.setText("");
     }
-
+    //½«Ôö¼ÓÊé¼®½çÃæµÄËùÓĞÎÄ±¾¿òÇå¿Õ
     private void clearBook(){
         txtISBNID.setText("");
         txtBookCategories.setText("");
@@ -598,87 +608,87 @@ public class MenuAdmin extends JFrame {
         txtPrice.setText("");
         txtBookIntroduce.setText("");
     }
-
+    //³õÊ¼»¯¶ÁÕßĞÅÏ¢±í
     private void initTableReaderInformation(){
-        String[] cols={"è¯»è€…è¯å·","å¯†ç ","å§“å","æ€§åˆ«","å‡ºç”Ÿæ—¥æœŸ","èº«ä»½è¯å·","è¯»ä¹¦ç­‰çº§","å¯å€Ÿä¹¦æ•°é‡","å·²å€Ÿä¹¦æ•°é‡","å·¥ä½œéƒ¨é—¨","å®¶åº­ä½å€","è”ç³»æ–¹å¼"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÃÜÂë","ĞÕÃû","ĞÔ±ğ","³öÉúÈÕÆÚ","Éí·İÖ¤ºÅ","¶ÁÊéµÈ¼¶","¿É½èÊéÊıÁ¿","ÒÑ½èÊéÊıÁ¿","¹¤×÷²¿ÃÅ","¼ÒÍ¥×¡Ö·","ÁªÏµ·½Ê½"};
         String[][] rows=Dao.queryReader();
         tableResetReaderPWD=new JTable(rows,cols);
         tableReaderInformation=new JTable(rows,cols);
     }
-
+    //³õÊ¼»¯½èÊéĞÅÏ¢±í
     private void initTableLoadBookInformation(){
-        String[] cols={"è¯»è€…è¯å·","ä¹¦å·","å€Ÿä¹¦æ—¶é—´","åº”è¿˜ä¹¦æ—¶é—´","æ˜¯å¦è¿˜ä¹¦"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÊéºÅ","½èÊéÊ±¼ä","Ó¦»¹ÊéÊ±¼ä","ÊÇ·ñ»¹Êé","·£½ğ"};
         String[][] rows=Dao.queryLoadBook();
         tableReaderLoadBookInformation = new JTable(rows, cols);
     }
-
+    //³õÊ¼»¯Êé¼®ISBN±í
     private void initTableBookISBNInformation(){
-        String[] cols={"ISBNå·","ä¹¦ç±ç±»åˆ«","ä¹¦å","ä½œè€…","å‡ºç‰ˆç¤¾","å‡ºç‰ˆæ—¥æœŸ","å›¾ä¹¦é¦†è—ä¹¦","å¯å€Ÿä¹¦æ•°é‡","ä¹¦ç±ä»·æ ¼","ä¹¦ç±ä»‹ç»"};
+        String[] cols={"ISBNºÅ","Êé¼®Àà±ğ","ÊéÃû","×÷Õß","³ö°æÉç","³ö°æÈÕÆÚ","Í¼Êé¹İ²ØÊé","¿É½èÊéÊıÁ¿","Êé¼®¼Û¸ñ","Êé¼®½éÉÜ"};
         String[][] rows=Dao.queryISBNBook();
         tableBookInformation=new JTable(rows,cols);
     }
-
+    //³õÊ¼»¯Êé¼®ĞÅÏ¢±í
     private void initTableBookInformation(){
-        String[] cols={"ISBNå·","ä¹¦å·","æ˜¯å¦è¿˜ä¹¦"};
+        String[] cols={"ISBNºÅ","ÊéºÅ","ÊÇ·ñ»¹Êé"};
         String[][] rows=Dao.queryBook();
         tableBookID = new JTable(rows, cols);
     }
-
+    //³õÊ¼»¯²éÑ¯±í
     private void initTableSelectReader(){
-        String[] cols={"å›¾ä¹¦ç¼–å·", "ä¹¦å", "è¯»è€…è¯å·", "è¯»è€…å§“å", "å€Ÿå‡ºæ—¥æœŸ"};
+        String[] cols={"Í¼Êé±àºÅ", "ÊéÃû", "¶ÁÕßÖ¤ºÅ", "¶ÁÕßĞÕÃû", "½è³öÈÕÆÚ"};
         String[][] rows=Dao.SelectReader(null, null, 4);
         tableSelect = new JTable(rows, cols);
     }
-
+    //¸üĞÂ¶ÁÕß±í
     private void updateTableReader(){
-        String[] cols={"è¯»è€…è¯å·","å¯†ç ","å§“å","æ€§åˆ«","å‡ºç”Ÿæ—¥æœŸ","èº«ä»½è¯å·","è¯»ä¹¦ç­‰çº§","å¯å€Ÿä¹¦æ•°é‡","å·²å€Ÿä¹¦æ•°é‡","å·¥ä½œéƒ¨é—¨","å®¶åº­ä½å€","è”ç³»æ–¹å¼"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÃÜÂë","ĞÕÃû","ĞÔ±ğ","³öÉúÈÕÆÚ","Éí·İÖ¤ºÅ","¶ÁÊéµÈ¼¶","¿É½èÊéÊıÁ¿","ÒÑ½èÊéÊıÁ¿","¹¤×÷²¿ÃÅ","¼ÒÍ¥×¡Ö·","ÁªÏµ·½Ê½"};
         String[][] rows=Dao.queryReader();
         tableResetReaderPWD.setModel(new DefaultTableModel(rows,cols));
         tableReaderInformation.setModel(new DefaultTableModel(rows,cols));
     }
-
+    //¸üĞÂ½èÊé±í
     private void updateTableLoadBook(){
-        String[] cols={"è¯»è€…è¯å·","ä¹¦å·","å€Ÿä¹¦æ—¶é—´","åº”è¿˜ä¹¦æ—¶é—´","æ˜¯å¦è¿˜ä¹¦"};
+        String[] cols={"¶ÁÕßÖ¤ºÅ","ÊéºÅ","½èÊéÊ±¼ä","Ó¦»¹ÊéÊ±¼ä","ÊÇ·ñ»¹Êé","·£½ğ"};
         String[][] rows=Dao.queryLoadBook();
         tableReaderLoadBookInformation.setModel(new DefaultTableModel(rows,cols));
     }
-
+    //¸üĞÂÊé¼®ISBN±í
     private void updateTableISBNBook(){
-        String[] cols={"ISBNå·","ä¹¦ç±ç±»åˆ«","ä¹¦å","ä½œè€…","å‡ºç‰ˆç¤¾","å‡ºç‰ˆæ—¥æœŸ","å›¾ä¹¦é¦†è—ä¹¦","å¯å€Ÿä¹¦æ•°é‡","ä¹¦ç±ä»·æ ¼","ä¹¦ç±ä»‹ç»"};
+        String[] cols={"ISBNºÅ","Êé¼®Àà±ğ","ÊéÃû","×÷Õß","³ö°æÉç","³ö°æÈÕÆÚ","Í¼Êé¹İ²ØÊé","¿É½èÊéÊıÁ¿","Êé¼®¼Û¸ñ","Êé¼®½éÉÜ"};
         String[][] rows=Dao.queryISBNBook();
         tableBookInformation.setModel(new DefaultTableModel(rows,cols));
     }
-
+    //¸üĞÂÊéºÅ±í
     private void updateTableBook(){
-        String[] cols={"ISBNå·","ä¹¦å·","å€Ÿä¹¦æ—¶é—´"};
+        String[] cols={"ISBNºÅ","ÊéºÅ","ÊÇ·ñ¿É½è"};
         String[][] rows=Dao.queryBook();
         tableBookID.setModel(new DefaultTableModel(rows,cols));
     }
-
+    //¸üĞÂ²éÑ¯±í ÊäÈë²ÎÊıÎªn£¬nµÄÖµÓëÑ¡ÔñÄÇÖÖÀà±ğµÄ²éÑ¯ÓĞ¹Ø
     private void updateTableSelect(int n){
         if (n == 1){
-            String[] cols={"å›¾ä¹¦ç¼–å·","ä¹¦å","è¯»è€…è¯å·","æ˜¯å¦è¿˜ä¹¦"};
+            String[] cols={"Í¼Êé±àºÅ","ÊéÃû","¶ÁÕßÖ¤ºÅ","ÊÇ·ñ»¹Êé"};
             String[][] rows=Dao.SelectReader(txtSelect1.getText().trim(), null, n);
             tableSelect.setModel(new DefaultTableModel(rows,cols));
             txtSelect1.setText("");txtSelect2.setText("");
         }else if (n == 2){
-            String[] cols={"è¯»è€…è¯å·", "å§“å", "æ€§åˆ«", "å‡ºç”Ÿæ—¥æœŸ", "èº«ä»½è¯å·", "å€Ÿä¹¦ç­‰çº§",
-            "å¯å€Ÿä¹¦æ•°é‡", "å·²å€Ÿä¹¦æ•°é‡", "æ‰€åœ¨éƒ¨é—¨", "å®¶åº­ä½å€", "è”ç³»æ–¹å¼"};
+            String[] cols={"¶ÁÕßÖ¤ºÅ", "ĞÕÃû", "ĞÔ±ğ", "³öÉúÈÕÆÚ", "Éí·İÖ¤ºÅ", "½èÊéµÈ¼¶",
+            "¿É½èÊéÊıÁ¿", "ÒÑ½èÊéÊıÁ¿", "ËùÔÚ²¿ÃÅ", "¼ÒÍ¥×¡Ö·", "ÁªÏµ·½Ê½"};
             String[][] rows=Dao.SelectReader(txtSelect1.getText().trim(), txtSelect2.getText().trim(), n);
             tableSelect.setModel(new DefaultTableModel(rows,cols));
             txtSelect1.setText("");txtSelect2.setText("");
         }else if (n ==3){
-            String[] cols={"è¯»è€…è¯å·", "å§“å", "ä¹¦å·"};
+            String[] cols={"¶ÁÕßÖ¤ºÅ", "ĞÕÃû", "ÊéºÅ"};
             String[][] rows=Dao.SelectReader(null, null, n);
             tableSelect.setModel(new DefaultTableModel(rows,cols));
             txtSelect1.setText("");txtSelect2.setText("");
         }else if (n == 4){
-            String[] cols={"å›¾ä¹¦ç¼–å·", "ä¹¦å", "è¯»è€…è¯å·", "è¯»è€…å§“å", "å€Ÿå‡ºæ—¥æœŸ"};
+            String[] cols={"Í¼Êé±àºÅ", "ÊéÃû", "¶ÁÕßÖ¤ºÅ", "¶ÁÕßĞÕÃû", "½è³öÈÕÆÚ"};
             String[][] rows=Dao.SelectReader(null, null, n);
             tableSelect.setModel(new DefaultTableModel(rows,cols));
             txtSelect1.setText("");txtSelect2.setText("");
         }else if (n == 5){
-            String[] cols={"å›¾ä¹¦ç±»åˆ«", "å¤–å€Ÿæ¬¡æ•°"};
+            String[] cols={"Í¼ÊéÀà±ğ", "Íâ½è´ÎÊı"};
             String[][] rows=Dao.SelectReader(txtSelect1.getText().trim(), txtSelect2.getText().trim(), n);
             tableSelect.setModel(new DefaultTableModel(rows,cols));
             txtSelect1.setText("");txtSelect2.setText("");
@@ -686,40 +696,45 @@ public class MenuAdmin extends JFrame {
     }
 
     /**
-     *  æ£€æŸ¥æ—¶é—´æ ¼å¼æ˜¯å¦æ­£ç¡®
+     *  ¼ì²éÊ±¼ä¸ñÊ½ÊÇ·ñÕıÈ·
      * @param str
      * @return
      */
     public static boolean isValidDate(String str) {
         boolean convertSuccess=true;
-        // æŒ‡å®šæ—¥æœŸæ ¼å¼ä¸ºå››ä½å¹´/ä¸¤ä½æœˆä»½/ä¸¤ä½æ—¥æœŸï¼Œæ³¨æ„yyyy/MM/ddåŒºåˆ†å¤§å°å†™ï¼›
+        // Ö¸¶¨ÈÕÆÚ¸ñÊ½ÎªËÄÎ»Äê/Á½Î»ÔÂ·İ/Á½Î»ÈÕÆÚ£¬×¢Òâyyyy/MM/ddÇø·Ö´óĞ¡Ğ´£»
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            // è®¾ç½®lenientä¸ºfalse. å¦åˆ™SimpleDateFormatä¼šæ¯”è¾ƒå®½æ¾åœ°éªŒè¯æ—¥æœŸï¼Œæ¯”å¦‚2007/02/29ä¼šè¢«æ¥å—ï¼Œå¹¶è½¬æ¢æˆ2007/03/01
+            // ÉèÖÃlenientÎªfalse. ·ñÔòSimpleDateFormat»á±È½Ï¿íËÉµØÑéÖ¤ÈÕÆÚ£¬±ÈÈç2007/02/29»á±»½ÓÊÜ£¬²¢×ª»»³É2007/03/01
             sdf.setLenient(false);
             sdf.parse(str);
         } catch (ParseException e) {
             // e.printStackTrace();
-            // å¦‚æœthrow java.text.ParseExceptionæˆ–è€…NullPointerExceptionï¼Œå°±è¯´æ˜æ ¼å¼ä¸å¯¹
+            // Èç¹ûthrow java.text.ParseException»òÕßNullPointerException£¬¾ÍËµÃ÷¸ñÊ½²»¶Ô
             convertSuccess=false;
         }
         return convertSuccess;
     }
-
+    /**
+     * ÊäÈëÁ½¸öÊ±¼ä¶Î¡£¼ì²éÊ±¼äÒ»ÊÇ·ñÔÚÊ±¼ä¶şÖ®Ç°
+     * @param str1
+     * @param str2
+     * @return
+     */
     public static boolean isBefore(String str1, String str2) {
         boolean convertSuccess=true;
         boolean isbefore = false;
         Date d1 =new Date(), d2 = new Date();
-        // æŒ‡å®šæ—¥æœŸæ ¼å¼ä¸ºå››ä½å¹´/ä¸¤ä½æœˆä»½/ä¸¤ä½æ—¥æœŸï¼Œæ³¨æ„yyyy/MM/ddåŒºåˆ†å¤§å°å†™ï¼›
+        // Ö¸¶¨ÈÕÆÚ¸ñÊ½ÎªËÄÎ»Äê/Á½Î»ÔÂ·İ/Á½Î»ÈÕÆÚ£¬×¢Òâyyyy/MM/ddÇø·Ö´óĞ¡Ğ´£»
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            // è®¾ç½®lenientä¸ºfalse. å¦åˆ™SimpleDateFormatä¼šæ¯”è¾ƒå®½æ¾åœ°éªŒè¯æ—¥æœŸï¼Œæ¯”å¦‚2007/02/29ä¼šè¢«æ¥å—ï¼Œå¹¶è½¬æ¢æˆ2007/03/01
+            // ÉèÖÃlenientÎªfalse. ·ñÔòSimpleDateFormat»á±È½Ï¿íËÉµØÑéÖ¤ÈÕÆÚ£¬±ÈÈç2007/02/29»á±»½ÓÊÜ£¬²¢×ª»»³É2007/03/01
             sdf.setLenient(false);
             d1 = sdf.parse(str1);
             d2 = sdf.parse(str2);
         } catch (ParseException e) {
             // e.printStackTrace();
-            // å¦‚æœthrow java.text.ParseExceptionæˆ–è€…NullPointerExceptionï¼Œå°±è¯´æ˜æ ¼å¼ä¸å¯¹
+            // Èç¹ûthrow java.text.ParseException»òÕßNullPointerException£¬¾ÍËµÃ÷¸ñÊ½²»¶Ô
             convertSuccess=false;
         }
         if (convertSuccess) {
@@ -732,7 +747,7 @@ public class MenuAdmin extends JFrame {
     }
 
     /**
-     * ç”¨æ­£åˆ™è¡¨è¾¾å¼æ£€æŸ¥å­—ç¬¦ä¸²æ˜¯å¦ä¸ºæ­£æ•´æ•°
+     * ÓÃÕıÔò±í´ïÊ½¼ì²é×Ö·û´®ÊÇ·ñÎªÕıÕûÊı
      * @param str
      * @return
      */
@@ -746,7 +761,7 @@ public class MenuAdmin extends JFrame {
     }
 
     /**
-     *  ç”¨æ­£åˆ™è¡¨è¾¾å¼æ£€æŸ¥å­—ç¬¦ä¸²æ˜¯å¦ä¸ºæ­£æµ®ç‚¹æ•°
+     *  ÓÃÕıÔò±í´ïÊ½¼ì²é×Ö·û´®ÊÇ·ñÎªÕı¸¡µãÊı
      * @param str
      * @return
      */
